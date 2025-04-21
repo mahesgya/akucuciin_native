@@ -1,7 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
+
 
 const HomeScreen = () => {
+  const router = useRouter();
+
   return (
     <View style={styles.container}>
       <Image source={require("../assets/images/LogoAkucuciin.png")} style={styles.imageLogo} />
@@ -11,9 +15,10 @@ const HomeScreen = () => {
 
       <Image source={require("../assets/images/Mesin Cuci.png")} style={styles.image} />
 
-      <TouchableOpacity style={styles.buttonPrimary}>
+      <TouchableOpacity style={styles.buttonPrimary} onPress={() => router.push("/login")}>
         <Text style={styles.buttonPrimaryText}>LOGIN</Text>
       </TouchableOpacity>
+
 
       <Text style={styles.footer}>HIGHLY PROFESSIONAL CLEANING</Text>
     </View>
@@ -66,7 +71,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 8,
   },
-  buttonSecondaryText: {
+  buttonSecondaryText: {  
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
