@@ -1,4 +1,3 @@
-// app/login/index.tsx
 import React, { useState } from "react";
 import {
   View,
@@ -10,16 +9,13 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { useRouter } from "expo-router";
 
-export default function LoginScreen() {
+const LoginScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   const handleLogin = () => {
-    // Tambahkan autentikasi jika diperlukan
-    router.replace("/"); // Ganti ke halaman home
+    
   };
 
   return (
@@ -27,13 +23,11 @@ export default function LoginScreen() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      {/* Logo */}
       <Image source={require("../../assets/images/LogoAkucuciin.png")} style={styles.logo} resizeMode="contain" />
 
       <Text style={styles.title}>LOGIN</Text>
       <Text style={styles.subtitle}>Silahkan masukan Username dan Password anda</Text>
 
-      {/* Username Input */}
       <View style={styles.inputContainer}>
         <Text style={styles.inputIcon}>👤</Text>
         <TextInput
@@ -46,7 +40,6 @@ export default function LoginScreen() {
         />
       </View>
 
-      {/* Password Input */}
       <View style={styles.inputContainer}>
         <Text style={styles.inputIcon}>🔒</Text>
         <TextInput
@@ -59,13 +52,11 @@ export default function LoginScreen() {
         />
       </View>
 
-      {/* Tombol Login */}
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
-      {/* Tombol Daftar */}
-      <TouchableOpacity style={styles.registerButton} onPress={() => router.push("/register")}>
+      <TouchableOpacity style={styles.registerButton}>
         <Text style={styles.registerText}>Daftar</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
@@ -166,4 +157,6 @@ const styles = StyleSheet.create({
     color: "#444",
   },
 });
-  
+
+
+export default LoginScreen
