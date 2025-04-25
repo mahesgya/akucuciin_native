@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useRouter } from 'expo-router';
 
 const HomeScreen = () => {
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -12,7 +14,7 @@ const HomeScreen = () => {
 
       <Image source={require("../../assets/images/Mesin Cuci.png")} style={styles.image} />
 
-      <TouchableOpacity style={styles.buttonPrimary}>
+      <TouchableOpacity style={styles.buttonPrimary} onPress={() => router.push('/login')}>
         <Text style={styles.buttonPrimaryText}>LOGIN</Text>
       </TouchableOpacity>
 

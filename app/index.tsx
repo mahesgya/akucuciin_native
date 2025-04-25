@@ -1,9 +1,7 @@
 import HomeScreen from "./screens/home";
 
 const Index = () => {
-    return(
-        <HomeScreen/>
-    )
-}
+  return <HomeScreen />;
+};
 
-export default Index
+export default Index;

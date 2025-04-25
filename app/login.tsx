@@ -4,4 +4,4 @@ const Login = () => {
   return <LoginScreen />;
 };
 
-export default Login
+export default Login;
