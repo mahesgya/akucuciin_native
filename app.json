@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "AkuCuciinNative",
-    "slug": "AkuCuciinNative",
+    "name": "Mitra Laundry Akucuciin",
+    "slug": "Mitra Laundry Akucuciin",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/LogoAkucuciin2.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,

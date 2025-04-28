@@ -1,75 +1,44 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  Image,
-} from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from "react-native";
 
 const LoginScreen = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    
-  };
+  const handleLogin = () => {};
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
       <Image source={require("../../assets/images/LogoAkucuciin.png")} style={styles.logo} resizeMode="contain" />
 
       <Text style={styles.title}>LOGIN</Text>
-      <Text style={styles.subtitle}>Silahkan masukan Username dan Password anda</Text>
+      <Text style={styles.subtitle}>Silahkan masukan Email dan Password anda</Text>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.inputIcon}>👤</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          value={username}
-          onChangeText={setUsername}
-          autoCapitalize="none"
-          placeholderTextColor="#444"
-        />
+        <Image source={require("../../assets/images/email.png")} style={styles.inputIcon}></Image>
+        <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" placeholderTextColor="#525252" />
       </View>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.inputIcon}>🔒</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-          placeholderTextColor="#444"
-        />
+        <Image source={require("../../assets/images/passwordReg.png")} style={styles.inputIcon}></Image>
+        <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry placeholderTextColor="#525252 " />
       </View>
 
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}> 
         <Text style={styles.loginText}>Login</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.registerButton}>
-        <Text style={styles.registerText}>Daftar</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f3f6ff",
     alignItems: "center",
-    paddingTop: 80,
+    justifyContent: "center",
   },
+
   logo: {
     width: 200,
     height: 60,
@@ -82,81 +51,47 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#555",
-    marginBottom: 30,
+    marginBottom: 70,
     fontSize: 14,
   },
   inputContainer: {
     flexDirection: "row",
-    backgroundColor: "#f3f0ff",
-    borderRadius: 20,
+    backgroundColor: "#ffff",
+    borderRadius: 8,
     width: "85%",
     alignItems: "center",
     marginBottom: 15,
     paddingHorizontal: 15,
     height: 50,
+    elevation: 2,
+    borderColor: "#00000",
   },
   inputIcon: {
     fontSize: 18,
+    width: 25,
+    height: 25,
     marginRight: 10,
   },
   input: {
     flex: 1,
-    fontSize: 16,
-    color: "#000",
+    fontSize: 16, 
+    color: "#525252",
   },
   loginButton: {
     backgroundColor: "#5f7cfb",
     paddingVertical: 14,
     paddingHorizontal: 50,
-    borderRadius: 20,
-    marginTop: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 8,
+    borderRadius: 8,
+    marginTop: 20,
+    width: "85%",
+    elevation: 4,
   },
   loginText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
-  },
-  googleButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderColor: "#eee",
-    borderRadius: 15,
-    paddingVertical: 12,
-    paddingHorizontal: 25,
-    marginTop: 30,
-  },
-  googleIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
-  },
-  googleText: {
-    fontSize: 14,
-    color: "#333",
-  },
-  registerButton: {
-    marginTop: 10,
-    backgroundColor: "#ddd",
-    paddingVertical: 14,
-    paddingHorizontal: 50,
-    borderRadius: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.15,
-    shadowRadius: 5,
-    elevation: 5,
-  },
-  registerText: {
-    fontWeight: "bold",
-    color: "#444",
+    textAlign: "center",
   },
 });
 
-
-export default LoginScreen
+export default LoginScreen;
