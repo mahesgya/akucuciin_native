@@ -18,7 +18,6 @@ const HomeScreen = () => {
         <Text style={styles.buttonPrimaryText}>LOGIN</Text>
       </TouchableOpacity>
 
-
       <Text style={styles.footer}>HIGHLY PROFESSIONAL CLEANING</Text>
     </View>
   );

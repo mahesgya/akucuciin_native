@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from "react-native";
+import AuthServices from "../services/auth.services";
+import AlertService from "../hooks/alert";
+import { AxiosError } from "axios";
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    try {
+      await AuthServices.LoginAdmin(email, password);
+      console.log("LOGIN BERHASIL")
+    } catch (error) {
+      console.log("ERROR DETAIL: ", error);
+      const err = error as AxiosError<any>;
+      const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
+
+      AlertService.error("Gagal Melakukan Login", message);
+    }
+  };
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
@@ -24,7 +38,7 @@ const LoginScreen = () => {
         <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry placeholderTextColor="#525252 " />
       </View>
 
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}> 
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
@@ -51,7 +65,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: "#555",
-    marginBottom: 70,
+    marginBottom: 40,
     fontSize: 14,
   },
   inputContainer: {
@@ -74,7 +88,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 16, 
+    fontSize: 16,
     color: "#525252",
   },
   loginButton: {
@@ -82,7 +96,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 50,
     borderRadius: 8,
-    marginTop: 20,
+    marginTop: 40,
     width: "85%",
     elevation: 4,
   },
