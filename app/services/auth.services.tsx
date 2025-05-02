@@ -8,12 +8,29 @@ const AuthServices = {
     Login: async (email:string, password:string) => {
         try {
             const response = await axios.post(`${API_URL}/api/laundry_partner/app/login`, {email: email, password: password})
+            const {accessToken, refreshToken} = response.data;
+
+            await AsyncStorage.setItem("accessToken", accessToken);
+            await AsyncStorage.setItem("refreshToken", refreshToken);
+
             return response.data.data;
         } catch (error) {
             throw error;
         }
     }, 
-    
+    Logout: async (refreshToken:string) => {
+        try {
+            const response = await axios.post(`${API_URL}/api/laundry_partner/app/logout`, {refresh_token : refreshToken})
+
+            await AsyncStorage.removeItem("accessToken");
+            await AsyncStorage.removeItem("refreshToken");
+
+            return response.data.data;
+        } catch (error) {
+            throw error;
+        }
+    },
+   
 }
 
 export default AuthServices;
