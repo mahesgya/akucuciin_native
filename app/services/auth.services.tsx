@@ -30,7 +30,19 @@ const AuthServices = {
             throw error;
         }
     },
-   
+    TokenRefresh: async (refreshTokenOld:string) => {
+        try {
+            const response = await axios.put(`${API_URL}/api/auth`, {refresh_token : refreshTokenOld} )
+            const {accessTokenNew, refreshTokenNew} = response.data.data;
+
+            await AsyncStorage.setItem("accessToken", accessTokenNew);
+            await AsyncStorage.setItem("refreshToken", refreshTokenNew);
+
+            return response.data.data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default AuthServices;
