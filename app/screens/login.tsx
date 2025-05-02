@@ -1,22 +1,23 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from "react-native";
 import AuthServices from "../services/auth.services";
 import AlertService from "../hooks/alert";
 import { AxiosError } from "axios";
+import { useRouter } from 'expo-router';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const router = useRouter();
+
   const handleLogin = async () => {
     try {
-      await AuthServices.LoginAdmin(email, password);
-      console.log("LOGIN BERHASIL")
+      await AuthServices.Login(email, password);
+      router.push('/dashboard');
     } catch (error) {
-      console.log("ERROR DETAIL: ", error);
       const err = error as AxiosError<any>;
       const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
-
       AlertService.error("Gagal Melakukan Login", message);
     }
   };
