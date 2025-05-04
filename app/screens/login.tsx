@@ -32,12 +32,12 @@ const LoginScreen = () => {
 
       <View style={styles.inputContainer}>
         <Image source={require("../../assets/images/email.png")} style={styles.inputIcon}></Image>
-        <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" placeholderTextColor="#525252" />
+        <TextInput style={styles .input} placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" placeholderTextColor="#525252" underlineColorAndroid="transparent"/>
       </View>
 
       <View style={styles.inputContainer}>
         <Image source={require("../../assets/images/passwordReg.png")} style={styles.inputIcon}></Image>
-        <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry placeholderTextColor="#525252 " />
+        <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry placeholderTextColor="#525252" underlineColorAndroid="transparent" />
       </View>
 
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
@@ -92,6 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: "#525252",
+    borderWidth: 0, 
   },
   loginButton: {
     backgroundColor: "#5f7cfb",
