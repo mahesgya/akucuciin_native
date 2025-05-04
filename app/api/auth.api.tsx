@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_URL = config.apiUrl;
 
-const AuthServices = {
+const AuthApi = {
     Login: async (email:string, password:string) => {
         try {
             const response = await axios.post(`${API_URL}/api/laundry_partner/app/login`, {email: email, password: password})
@@ -45,4 +45,4 @@ const AuthServices = {
     }
 }
 
-export default AuthServices;
+export default AuthApi;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from "react-native";
-import AuthServices from "../services/auth.services";
+import AuthApi from "../api/auth.api";
 import AlertService from "../hooks/alert";
 import { AxiosError } from "axios";
 import { useRouter } from 'expo-router';
@@ -13,7 +13,7 @@ const LoginScreen = () => {
 
   const handleLogin = async () => {
     try {
-      await AuthServices.Login(email, password);
+      await AuthApi.Login(email, password);
       router.push('/dashboard');
     } catch (error) {
       const err = error as AxiosError<any>;
