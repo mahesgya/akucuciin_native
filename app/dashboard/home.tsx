@@ -1,9 +1,9 @@
-import DashboardScreen from "./screens/dashboard";
+import DashboardScreen from "../screens/dashboard";
 
 const Dashboard = () => {
     return(
         <>
-        <DashboardScreen/>
+            <DashboardScreen/>
         </>
     )
 }

@@ -14,7 +14,8 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     try {
       await AuthApi.Login(email, password);
-      router.push('/dashboard');
+      console.log("LOGIN BERHASIL")
+      router.push('/dashboard/home');
     } catch (error) {
       const err = error as AxiosError<any>;
       const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
