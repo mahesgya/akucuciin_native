@@ -1,10 +1,10 @@
-import DashboardScreen from "../screens/dashboard";
+import { View } from "react-native"
 
 const Dashboard = () => {
     return(
-        <>
-            <DashboardScreen/>
-        </>
+        <View>
+            INI DASHBOARD
+        </View>
     )
 }
 
