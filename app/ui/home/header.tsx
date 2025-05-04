@@ -9,14 +9,14 @@ type HeaderHomeProps = {
 
 const HeaderHome: React.FC<HeaderHomeProps> = ( {title, totalAmount} ) => {
     return(
-        <View>
-            <View>
+        <View style={styles.container}>
+            <View style={styles.topContainer}>
                 <Text> {title} </Text>
             </View>
 
             {totalAmount && (
-            <View>
-                <Text>Rp{totalAmount}</Text>
+            <View style={styles.amountContainer}>
+                <Text style={styles.amountText}>Rp{totalAmount}</Text>
             </View>
             )}
         </View>
