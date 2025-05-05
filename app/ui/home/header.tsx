@@ -11,7 +11,7 @@ const HeaderHome: React.FC<HeaderHomeProps> = ( {title, totalAmount} ) => {
     return(
         <View style={styles.container}>
             <View style={styles.topContainer}>
-                <Text> {title} </Text>
+                <Text style={styles.title}> {title} </Text>
             </View>
 
             {totalAmount && (
@@ -30,13 +30,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     topContainer: {
+        flex: 1,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         paddingVertical: 5,
     },
     title: {
-        fontSize: 22,
+        fontSize: 30,
         fontWeight: 'bold',
         color: colors.primary,
     },
