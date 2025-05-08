@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, TextInput, Platform, StatusBar } from "react-native";
+import { AxiosError } from "axios";
 import { colors } from "../constants/colors";
 import { Feather } from "@expo/vector-icons";
 import { Calendar } from "react-native-calendars";
@@ -9,10 +11,8 @@ import OrderCardHome from "../ui/card/order.card.home";
 import StatusFilter from "../ui/filter/status.filter";
 import AlertService from "../hooks/alert";
 import { formatDate } from "../hooks/format.date";
-
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "../interface/order.interface";
-import { AxiosError } from "axios";
+import { useRouter } from "expo-router";
 
 const statusOptions = [
   { label: "Pending", value: "pending", color: colors.pending },
@@ -25,6 +25,8 @@ const statusOptions = [
 ];
 
 const DashboardHome = () => {
+  const router = useRouter();
+
   const [searchText, setSearchText] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
@@ -70,8 +72,12 @@ const DashboardHome = () => {
     setShowCalendar(false);
   };
 
-  const handleDetailOrder = async (orderId: string) => {};
-
+  const handleDetailOrder = (orderId: string) => {
+    router.push({
+      pathname: "/dashboard/order/[orderId]",
+      params: { orderId },
+    });    
+  };
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />

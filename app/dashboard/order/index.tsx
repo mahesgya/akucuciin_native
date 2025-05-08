@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, SafeAreaView, FlatList, TextInput, Platform, StatusBar } from "react-native";
-import { colors } from "../constants/colors";
+import { colors } from "../../constants/colors";
 import { Feather } from "@expo/vector-icons";
 
-import OrderApi from "../api/order.api";
-import OrderCardHistory from "../ui/card/order.card.history";
-import AlertService from "../hooks/alert";
+import OrderApi from "../../api/order.api";
+import OrderCardHistory from "../../ui/card/order.card.history";
+import AlertService from "../../hooks/alert";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { OrderInterface } from "../interface/order.interface";
+import { OrderInterface } from "../../interface/order.interface";
 import { AxiosError } from "axios";
-import MonthFilter from "../ui/filter/month.filter";
-import YearFilter from "../ui/filter/year.filter";
+import MonthFilter from "../../ui/filter/month.filter";
+import YearFilter from "../../ui/filter/year.filter";
+import { useRouter } from "expo-router";
 
 const DashboardOrder = () => {
+  const router = useRouter();
+
   const [searchText, setSearchText] = useState<string>("");
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
   const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
@@ -77,10 +80,13 @@ const DashboardOrder = () => {
     return matchesSearch && matchesDate;
   });
 
-  const handleDetailOrder = async (orderId: string) => {
-    // Implementasi navigasi ke detail order
+  const handleDetailOrder = (orderId: string) => {
+    router.push({
+      pathname: "/dashboard/order/[orderId]",
+      params: { orderId },
+    });    
   };
-
+  
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
