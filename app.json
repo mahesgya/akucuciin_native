@@ -32,6 +32,40 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            {
+              "fontFamily": "Montserrat",
+              "fontFile": "./assets/fonts/Montserrat-Regular.ttf"
+            }
+          ],
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "Montserrat",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Montserrat-Regular.ttf",
+                    "weight": 500
+                  },
+                  {
+                    "path": "./assets/fonts/Montserrat-Bold.ttf",
+                    "weight": 700
+                  }
+                ]
+              }
+            ]
+          },
+          "ios": {
+            "fonts": [
+              "./assets/fonts/Montserrat-Regular.ttf",
+              "./assets/fonts/Montserrat-Bold.ttf"
+            ]
+          }
+        }
       ]
     ],
     "experiments": {

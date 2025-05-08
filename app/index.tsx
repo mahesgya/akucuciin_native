@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useRouter } from 'expo-router';
+import { useFonts } from 'expo-font';
 
 const Index = () => {
   const router = useRouter();

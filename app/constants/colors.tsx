@@ -9,10 +9,10 @@ export const colors = {
     black_70: "rgba(0, 0, 0, 0.7)",
     background: "rgba(87, 143, 202, 0.2)",
     background_thin: "rgba(87, 143, 202, 0.1)",
-    penjemputan: "#FC8621",
+    penjemputan: "rgba(87, 143, 202, 0.65)",
     pencucian: "#578FCA", 
     selesai: "#40A578",
-    pending: "#FFD31D",
+    pending: "#FC8621",
     kesalahan: "#D9D9D9",
     batal: "#E52020",
     white: "#FFFFFF"

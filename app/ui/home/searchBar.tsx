@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     height: '100%',
     fontSize: 16,
     color: colors.primary_65,
+
   },
 });
 

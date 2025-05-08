@@ -75,7 +75,6 @@ const DashboardHome = () => {
 
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>PESANAN</Text>
-        <Text style={styles.headerPrice}>Rp229.188</Text>
         <Text style={styles.headerDate}>{formatDate(selectedDate).toUpperCase()}</Text>
       </View>
 
@@ -135,19 +134,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: colors.primary,
-  },
-  headerPrice: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: colors.selesai,
-    position: "absolute",
-    right: 16,
-    top: 10,
+    fontFamily: "Montserrat"
   },
   headerDate: {
     fontSize: 14,
     color: colors.black_60,
     marginTop: 5,
+    fontFamily: "Montserrat"
   },
   weekDaysContainer: {
     flexDirection: "row",

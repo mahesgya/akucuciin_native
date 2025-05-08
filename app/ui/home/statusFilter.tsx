@@ -104,6 +104,7 @@ const styles = StyleSheet.create({
   filterText: {
     fontSize: 12,
     color: colors.black_60,
+    fontFamily: "Montserrat"
   },
   activeFilterText: {
     color: '#fff',

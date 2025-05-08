@@ -8,7 +8,7 @@ interface OrderItemProps {
   onActionPress: (id: string) => void;
 }
 
-const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress}) => {
+const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
   const defaultIcon = require("../../../assets/images/LogoAkucuciin2.png");
 
   return (
@@ -18,8 +18,12 @@ const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress}) => {
           <Image source={defaultIcon} style={styles.icon} resizeMode="contain" />
         </View>
         <View style={styles.detailsContainer}>
-          <Text style={styles.orderName}>{order.customer.name} - <Text style={styles.orderId}>{order.id}</Text></Text>
-          <Text style={styles.orderDetails}>{order.package.name} - {order.package.price_text}</Text>
+          <Text style={styles.orderName}>
+            {order.customer.name} <Text style={styles.orderId}>- {order.id}</Text>
+          </Text>
+          <Text style={styles.orderDetails}>
+            {order.package.name} - {order.package.price_text}
+          </Text>
         </View>
       </View>
 
@@ -52,15 +56,15 @@ const getStatusColor = (status: string): string => {
 };
 
 const getTextColor = (status: string): string => {
-  switch(status.toLowerCase()){
+  switch (status.toLowerCase()) {
     case "pending":
-      return colors.black_60;
+      return colors.white;
     case "kesalahan":
       return colors.black_60;
     default:
       return colors.white;
   }
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -95,9 +99,10 @@ const styles = StyleSheet.create({
   },
   orderName: {
     fontSize: 18,
-    fontWeight: "bold",
     color: colors.primary,
     marginBottom: 4,
+    fontFamily: "Montserrat",
+    fontWeight: '700'
   },
   orderId: {
     fontSize: 10,
@@ -123,9 +128,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#ffffff",
     textAlign: "center",
-    textShadowColor: '#000', 
-    textShadowOffset: { width: 0.2, height: 0.2 }, 
-    textShadowRadius: 1
+    textShadowColor: "#000",
+    textShadowOffset: { width: 0.2, height: 0.2 },
+    textShadowRadius: 1,
   },
 });
 
