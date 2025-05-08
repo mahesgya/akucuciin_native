@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, TextInput, Platform, StatusBar } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, FlatList, TextInput, Platform, StatusBar } from "react-native";
 import { colors } from "../constants/colors";
 import { Feather } from "@expo/vector-icons";
 
@@ -11,14 +11,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "../interface/order.interface";
 import { AxiosError } from "axios";
 import MonthFilter from "../ui/filter/month.filter";
+import YearFilter from "../ui/filter/year.filter";
 
 const DashboardOrder = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
-  const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear());
+  const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const months = ["JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER"];
+  const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
   const monthOptions = months.map((month, index) => ({
     label: month,
@@ -47,15 +48,19 @@ const DashboardOrder = () => {
     fetchOrders();
   }, [accessToken]);
 
+  const formatMonthYear = (): string => {
+    if (selectedMonth === null) {
+      return `SEMUA BULAN ${selectedYear}`;
+    }
+    return `${months[selectedMonth]} ${selectedYear}`;
+  };
+
   const handleMonthSelect = (month: number | null) => {
     setSelectedMonth(month);
   };
 
-  const formatMonths = (): string => {
-    if (selectedMonth === null) {
-      return "SEMUA BULAN " + currentYear;
-    }
-    return `${months[selectedMonth]} ${currentYear}`;
+  const handleYearSelect = (year: number) => {
+    setSelectedYear(year);
   };
 
   const filteredOrders = orders.filter((order) => {
@@ -64,22 +69,32 @@ const DashboardOrder = () => {
     const matchesSearch = searchText === "" || order.customer.name.toLowerCase().includes(searchText.toLowerCase()) || order.package.name.toLowerCase().includes(searchText.toLowerCase());
 
     let matchesDate = true;
-    if (selectedMonth !== null) {
-      matchesDate = orderDate.getMonth() === selectedMonth && orderDate.getFullYear() === currentYear;
+
+    if (selectedMonth === null) {
+      matchesDate = orderDate.getFullYear() === selectedYear;
+    } else {
+      matchesDate = orderDate.getMonth() === selectedMonth && orderDate.getFullYear() === selectedYear;
     }
 
     return matchesSearch && matchesDate;
   });
 
-  const handleDetailOrder = async (orderId: string) => {};
+  const handleDetailOrder = async (orderId: string) => {
+    // Implementasi navigasi ke detail order
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
       <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>RIWAYAT PESANAN</Text>
-        <Text style={styles.headerDate}>{formatMonths()}</Text>
+        <View>
+          <Text style={styles.headerTitle}>RIWAYAT PESANAN</Text>
+          <Text style={styles.headerDate}>{formatMonthYear()}</Text>
+        </View>
+        <View style={styles.yearFilter}>
+          <YearFilter  selectedYear={selectedYear} onSelectYear={handleYearSelect} startYear={2020} endYear={new Date().getFullYear()} />
+        </View>
       </View>
       <>
         <View style={styles.filterBarContainer}>
@@ -88,8 +103,11 @@ const DashboardOrder = () => {
             <TextInput style={styles.searchInput} placeholder="Search" value={searchText} onChangeText={setSearchText} placeholderTextColor={colors.black_40} />
           </View>
 
-          <MonthFilter options={monthOptions} selectedMonth={selectedMonth} onSelectMonth={handleMonthSelect} />
+          <View style={styles.filtersRow}>
+            <MonthFilter options={monthOptions} selectedMonth={selectedMonth} onSelectMonth={handleMonthSelect} />
+          </View>
         </View>
+
         {filteredOrders.length > 0 ? (
           <View style={styles.ordersContainer}>
             <FlatList
@@ -122,6 +140,11 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     backgroundColor: "#fff",
   },
+  yearFilter: {
+    position: "absolute",
+    right: 16,
+    top: 20,
+  },
   headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
@@ -148,6 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     height: 40,
+    marginBottom: 10,
   },
   searchIcon: {
     marginRight: 8,
@@ -157,6 +181,12 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 14,
     color: colors.black,
+  },
+  filtersRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: 8,
   },
   ordersContainer: {
     flex: 1,
