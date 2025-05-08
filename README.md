@@ -1,50 +1,70 @@
-# Welcome to your Expo app 👋
+# 🚀 Project RPL P2 — Mitra Apps Laundry (React Native + Expo)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangka Proyek RPL P2 menggunakan **React Native** dengan **Expo**. Aplikasi ini dirancang untuk mempermudah mitra dalam mengelola pesanan laundry, melihat detail pelanggan, dan mempercepat proses layanan digital laundry.
 
-## Get started
+---
 
-1. Install dependencies
+## 📦 Teknologi yang Digunakan
+
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Expo Router (File-based Routing)](https://docs.expo.dev/router/introduction/)
+
+---
+
+## 🔧 Cara Menjalankan Proyek
+
+1. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. **Jalankan aplikasi**
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   Setelah itu, kamu bisa memilih untuk membuka aplikasi di:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   - [Development Build](https://docs.expo.dev/develop/development-builds/introduction/)
+   - [Android Emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+   - [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
+   - [Expo Go](https://expo.dev/go) (fitur terbatas)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 📁 Struktur Proyek
 
-When you're ready, run:
+Pengembangan dilakukan dalam folder `app/` menggunakan sistem **file-based routing** dari Expo Router. Kamu bisa mulai coding dengan mengedit atau menambahkan file di dalam folder tersebut.
+
+---
+
+## 🔄 Reset Proyek (Jika Diperlukan)
+
+Untuk memulai dari awal dengan struktur kosong:
 
 ```bash
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Perintah ini akan memindahkan starter code ke direktori `app-example` dan membuat direktori `app/` kosong sebagai tempat kamu memulai pengembangan dari nol.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+## 📚 Dokumentasi & Sumber Belajar
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- [Dokumentasi Expo](https://docs.expo.dev/)
+- [Tutorial Expo](https://docs.expo.dev/tutorial/introduction/)
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+## 🤝 Komunitas & Kontribusi
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Bergabunglah dengan komunitas developer Expo:
+
+- [GitHub Expo](https://github.com/expo/expo)
+- [Discord Resmi Expo](https://chat.expo.dev)
+
+---
