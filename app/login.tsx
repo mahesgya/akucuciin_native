@@ -14,7 +14,6 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       await AuthApi.Login(email, password);
-      console.log("LOGIN BERHASIL")
       router.push('/dashboard/home');
     } catch (error) {
       const err = error as AxiosError<any>;

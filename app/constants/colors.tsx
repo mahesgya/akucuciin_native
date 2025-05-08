@@ -14,5 +14,6 @@ export const colors = {
     selesai: "#40A578",
     pending: "#FFD31D",
     kesalahan: "#D9D9D9",
-    batal: "#E52020"
+    batal: "#E52020",
+    white: "#FFFFFF"
 } 

@@ -8,7 +8,6 @@ type SearchBarProps = {
     onSubmit: () => void;
   }
   
-
 const SearchBar: React.FC<SearchBarProps> = ({ value, onChangeText, onSubmit }) => {
   return (
     <View style={styles.container}>

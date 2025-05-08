@@ -8,7 +8,9 @@ const AuthApi = {
     Login: async (email:string, password:string) => {
         try {
             const response = await axios.post(`${API_URL}/api/laundry_partner/app/login`, {email: email, password: password})
-            const {accessToken, refreshToken} = response.data;
+            const {accessToken, refreshToken} = response.data.data;
+            console.log(response)
+            console.log(response.data)
 
             await AsyncStorage.setItem("accessToken", accessToken);
             await AsyncStorage.setItem("refreshToken", refreshToken);

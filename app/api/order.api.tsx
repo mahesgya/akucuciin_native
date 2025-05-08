@@ -4,9 +4,9 @@ import { config } from "@/config/env";
 const API_URL = config.apiUrl
 
 const OrderApi = {
-    getOrderByLaundry: async (idLaundry:string, accessToken:string) => {
+    getOrderByLaundry: async (accessToken:string) => {
         try {
-            const response = await axios.get(`${API_URL}/api/laundry_partner/app/orders/${idLaundry}`, {
+            const response = await axios.get(`${API_URL}/api/laundry_partner/app/orders`, {
                 headers : {Authorization: `Bearer ${accessToken}`}
             })
 
