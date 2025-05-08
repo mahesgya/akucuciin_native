@@ -8,6 +8,15 @@ interface OrderItemProps {
   onActionPress: (id: string) => void;
 }
 
+const formatTime = (date: Date): string => {
+
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+
+  return `${hours}:${minutes}`;
+};
+
+
 const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
   const defaultIcon = require("../../../assets/images/LogoAkucuciin2.png");
 
@@ -19,7 +28,7 @@ const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.orderName}>
-            {order.customer.name} <Text style={styles.orderId}>- {order.id}</Text>
+            {order.customer.name} <Text style={styles.orderTime}>- {formatTime(new Date(order.created_at))}</Text>
           </Text>
           <Text style={styles.orderDetails}>
             {order.package.name} - {order.package.price_text}
@@ -70,7 +79,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     borderRadius: 10,
-    padding: 15,
+    padding: 10    ,
     marginVertical: 6,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -104,14 +113,14 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
     fontWeight: '700'
   },
-  orderId: {
-    fontSize: 8,
+  orderTime: {
+    fontSize: 10,
     color: colors.black_40,
     marginBottom: 4,
     fontFamily: "Montserrat"
   },
   orderDetails: {
-    fontSize: 12,
+    fontSize: 10,
     color: colors.black_60,
     marginBottom: 4,
     fontFamily: "Montserrat"
@@ -130,7 +139,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     textAlign: "center",
     textShadowColor: "#000",
-    textShadowOffset: { width: 0.2, height: 0.2 },
+    textShadowOffset: { width: 0.1, height: 0.1 },
     textShadowRadius: 1,
     fontFamily: "Montserrat"
   },
