@@ -10,13 +10,20 @@ import AlertService from "../hooks/alert";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "../interface/order.interface";
 import { AxiosError } from "axios";
-
+import MonthFilter from "../ui/home/monthsFilter";
 
 const DashboardOrder = () => {
   const [searchText, setSearchText] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+  const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear());
   const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const months = ["JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER"];
+
+  const monthOptions = months.map((month, index) => ({
+    label: month,
+    value: index
+  }));
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -40,19 +47,31 @@ const DashboardOrder = () => {
     fetchOrders();
   }, [accessToken]);
 
-  const formatMonths = (date: Date): string => {
-    const months = ["JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER"];
+  const handleMonthSelect = (month: number | null) => {
+    setSelectedMonth(month);
+  };
 
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
+  const formatMonths = (): string => {
+    if (selectedMonth === null) {
+      return "SEMUA BULAN " + currentYear;
+    }
+    return `${months[selectedMonth]} ${currentYear}`;
   };
 
   const filteredOrders = orders.filter((order) => {
     const orderDate = new Date(order.created_at);
-    const sameDay = orderDate.getDate() === selectedDate.getDate() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getFullYear() === selectedDate.getFullYear();
-    const matchesSearch = searchText === "" || order.customer.name.toLowerCase().includes(searchText.toLowerCase()) || order.package.name.toLowerCase().includes(searchText.toLowerCase());
 
-    const matchesDate = sameDay;
-    return matchesSearch  && matchesDate;
+    const matchesSearch = searchText === "" || 
+                          order.customer.name.toLowerCase().includes(searchText.toLowerCase()) || 
+                          order.package.name.toLowerCase().includes(searchText.toLowerCase());
+    
+    let matchesDate = true;
+    if (selectedMonth !== null) {
+      matchesDate = orderDate.getMonth() === selectedMonth && 
+                    orderDate.getFullYear() === currentYear;
+    }
+    
+    return matchesSearch && matchesDate;
   });
 
   const handleDetailOrder = async (orderId: string) => {};
@@ -63,7 +82,7 @@ const DashboardOrder = () => {
 
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>RIWAYAT PESANAN</Text>
-        <Text style={styles.headerDate}>{formatMonths(selectedDate).toUpperCase()}</Text>
+        <Text style={styles.headerDate}>{formatMonths()}</Text>
       </View>
         <>
           <View style={styles.filterBarContainer}>
@@ -72,6 +91,11 @@ const DashboardOrder = () => {
               <TextInput style={styles.searchInput} placeholder="Search" value={searchText} onChangeText={setSearchText} placeholderTextColor={colors.black_40} />
             </View>
             
+            <MonthFilter 
+            options={monthOptions}
+            selectedMonth={selectedMonth}
+            onSelectMonth={handleMonthSelect}
+          />
           </View>
           {filteredOrders.length > 0 ? (
             <View style={styles.ordersContainer}>
