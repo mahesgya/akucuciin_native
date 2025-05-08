@@ -14,7 +14,7 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
   const defaultIcon = require("../../../assets/images/LogoAkucuciin2.png");
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => onActionPress(order.id)}>
       <View style={styles.contentContainer}>
         <View style={styles.iconContainer}>
           <Image source={defaultIcon} style={styles.icon} resizeMode="contain" />
@@ -32,12 +32,12 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.statusContainer} onPress={() => onActionPress(order.id)}>
+      <View style={styles.statusContainer} >
         <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
           <Text style={[styles.statusText, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
         </View>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
