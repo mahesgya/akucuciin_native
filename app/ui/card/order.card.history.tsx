@@ -2,22 +2,15 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { colors } from "../../constants/colors";
 import { OrderInterface } from "@/app/interface/order.interface";
+import { formatDate } from "@/app/hooks/format.date";
+import { getStatusColor, getTextColor } from "@/app/hooks/color";
 
 interface OrderItemProps {
   order: OrderInterface;
   onActionPress: (id: string) => void;
 }
 
-const formatTime = (date: Date): string => {
-
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-
-  return `${hours}:${minutes}`;
-};
-
-
-const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
+const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
   const defaultIcon = require("../../../assets/images/LogoAkucuciin2.png");
 
   return (
@@ -28,10 +21,13 @@ const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.orderName}>
-            {order.customer.name} <Text style={styles.orderTime}>- {formatTime(new Date(order.created_at))}</Text>
+            {order.customer.name} 
           </Text>
           <Text style={styles.orderDetails}>
             {order.package.name} - {order.package.price_text}
+          </Text>
+          <Text style={styles.orderDate}>
+           {formatDate(new Date(order.created_at))}
           </Text>
         </View>
       </View>
@@ -45,35 +41,6 @@ const OrderItem: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
   );
 };
 
-const getStatusColor = (status: string): string => {
-  switch (status.toLowerCase()) {
-    case "selesai":
-      return colors.selesai;
-    case "pencucian":
-      return colors.pencucian;
-    case "penjemputan":
-      return colors.penjemputan;
-    case "pengantaran":
-      return colors.primary;
-    case "batal":
-      return colors.batal;
-    case "pending":
-      return colors.pending;
-    default:
-      return colors.kesalahan;
-  }
-};
-
-const getTextColor = (status: string): string => {
-  switch (status.toLowerCase()) {
-    case "pending":
-      return colors.white;
-    case "kesalahan":
-      return colors.black_60;
-    default:
-      return colors.white;
-  }
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -118,7 +85,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
     fontWeight: '700'
   },
-  orderTime: {
+  orderDate: {
     fontSize: 10,
     color: colors.black_40,
     marginBottom: 4,
@@ -150,4 +117,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrderItem;
+export default OrderCardHome;

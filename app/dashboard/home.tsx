@@ -5,9 +5,10 @@ import { Feather } from "@expo/vector-icons";
 import { Calendar } from "react-native-calendars";
 
 import OrderApi from "../api/order.api";
-import OrderItem from "../ui/card/order.card";
+import OrderCardHome from "../ui/card/order.card.home";
 import StatusFilter from "../ui/filter/status.filter";
 import AlertService from "../hooks/alert";
+import { formatDate } from "../hooks/format.date";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "../interface/order.interface";
@@ -53,13 +54,6 @@ const DashboardHome = () => {
     fetchOrders();
   }, [accessToken]);
 
-  const formatDate = (date: Date): string => {
-    const days = ["MINGGU", "SENIN", "SELASA", "RABU", "KAMIS", "JUMAT", "SABTU"];
-    const months = ["JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI", "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER"];
-
-    return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-  };
-
   const filteredOrders = orders.filter((order) => {
     const orderDate = new Date(order.created_at);
     const sameDay = orderDate.getDate() === selectedDate.getDate() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getFullYear() === selectedDate.getFullYear();
@@ -84,7 +78,7 @@ const DashboardHome = () => {
 
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>PESANAN</Text>
-        <Text style={styles.headerDate}>{formatDate(selectedDate).toUpperCase()}</Text>
+        <Text style={styles.headerDate}>{formatDate(selectedDate)}</Text>
       </View>
 
       {showCalendar ? (
@@ -126,7 +120,7 @@ const DashboardHome = () => {
               <FlatList
                 data={filteredOrders}
                 keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <OrderItem order={item} onActionPress={() => handleDetailOrder(item.id)} />}
+                renderItem={({ item }) => <OrderCardHome order={item} onActionPress={() => handleDetailOrder(item.id)} />}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.ordersList}
               />

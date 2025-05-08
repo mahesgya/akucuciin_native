@@ -4,7 +4,7 @@ import { colors } from "../constants/colors";
 import { Feather } from "@expo/vector-icons";
 
 import OrderApi from "../api/order.api";
-import OrderItem from "../ui/card/order.card";
+import OrderCardHistory from "../ui/card/order.card.history";
 import AlertService from "../hooks/alert";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -50,7 +50,7 @@ const DashboardOrder = () => {
 
   const formatMonthYear = (): string => {
     if (selectedMonth === null) {
-      return `SEMUA BULAN ${selectedYear}`;
+      return `Semua Bulan ${selectedYear}`;
     }
     return `${months[selectedMonth]} ${selectedYear}`;
   };
@@ -65,11 +65,9 @@ const DashboardOrder = () => {
 
   const filteredOrders = orders.filter((order) => {
     const orderDate = new Date(order.created_at);
-
     const matchesSearch = searchText === "" || order.customer.name.toLowerCase().includes(searchText.toLowerCase()) || order.package.name.toLowerCase().includes(searchText.toLowerCase());
 
     let matchesDate = true;
-
     if (selectedMonth === null) {
       matchesDate = orderDate.getFullYear() === selectedYear;
     } else {
@@ -93,7 +91,7 @@ const DashboardOrder = () => {
           <Text style={styles.headerDate}>{formatMonthYear()}</Text>
         </View>
         <View style={styles.yearFilter}>
-          <YearFilter  selectedYear={selectedYear} onSelectYear={handleYearSelect} startYear={2020} endYear={new Date().getFullYear()} />
+          <YearFilter selectedYear={selectedYear} onSelectYear={handleYearSelect} startYear={2020} endYear={new Date().getFullYear()} />
         </View>
       </View>
       <>
@@ -113,7 +111,7 @@ const DashboardOrder = () => {
             <FlatList
               data={filteredOrders}
               keyExtractor={(item) => item.id}
-              renderItem={({ item }) => <OrderItem order={item} onActionPress={() => handleDetailOrder(item.id)} />}
+              renderItem={({ item }) => <OrderCardHistory order={item} onActionPress={() => handleDetailOrder(item.id)} />}
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.ordersList}
             />
@@ -171,7 +169,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingHorizontal: 10,
     height: 40,
-    marginBottom: 10,
   },
   searchIcon: {
     marginRight: 8,
@@ -186,7 +183,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginVertical: 8,
   },
   ordersContainer: {
     flex: 1,

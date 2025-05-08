@@ -1,0 +1,31 @@
+import { colors } from "../constants/colors";
+
+export const getStatusColor = (status: string): string => {
+  switch (status.toLowerCase()) {
+    case "selesai":
+      return colors.selesai;
+    case "pencucian":
+      return colors.pencucian;
+    case "penjemputan":
+      return colors.penjemputan;
+    case "pengantaran":
+      return colors.primary;
+    case "batal":
+      return colors.batal;
+    case "pending":
+      return colors.pending;
+    default:
+      return colors.kesalahan;
+  }
+};
+
+export const getTextColor = (status: string): string => {
+  switch (status.toLowerCase()) {
+    case "pending":
+      return colors.white;
+    case "kesalahan":
+      return colors.black_60;
+    default:
+      return colors.white;
+  }
+};
