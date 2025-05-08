@@ -98,22 +98,23 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   orderName: {
-    fontSize: 18,
+    fontSize: 14,
     color: colors.primary,
     marginBottom: 4,
     fontFamily: "Montserrat",
     fontWeight: '700'
   },
   orderId: {
-    fontSize: 10,
-    fontWeight: "bold",
+    fontSize: 8,
     color: colors.black_40,
     marginBottom: 4,
+    fontFamily: "Montserrat"
   },
   orderDetails: {
-    fontSize: 14,
+    fontSize: 12,
     color: colors.black_60,
     marginBottom: 4,
+    fontFamily: "Montserrat"
   },
   statusContainer: {
     flexDirection: "row",
@@ -121,16 +122,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 7,
     paddingHorizontal: 8,
-    minWidth: 120,
+    minWidth: 100,
     borderRadius: 7,
   },
   statusText: {
-    fontSize: 14,
+    fontSize: 10,
     color: "#ffffff",
     textAlign: "center",
     textShadowColor: "#000",
     textShadowOffset: { width: 0.2, height: 0.2 },
     textShadowRadius: 1,
+    fontFamily: "Montserrat"
   },
 });
 

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
-import { useRouter } from 'expo-router';
-import { useFonts } from 'expo-font';
+import { useRouter } from "expo-router";
+import { useFonts } from "expo-font";
 
 const Index = () => {
   const router = useRouter();
@@ -14,7 +14,7 @@ const Index = () => {
 
       <Image source={require("../assets/images/Mesin Cuci.png")} style={styles.image} />
 
-      <TouchableOpacity style={styles.buttonPrimary} onPress={() => router.push('/login')}>
+      <TouchableOpacity style={styles.buttonPrimary} onPress={() => router.push("/login")}>
         <Text style={styles.buttonPrimaryText}>LOGIN</Text>
       </TouchableOpacity>
 
@@ -41,12 +41,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     color: "#333",
+    fontFamily: "Montserrat",
   },
   subtitle: {
     fontSize: 22,
     fontWeight: "bold",
     color: "#6D83F2",
     marginBottom: 30,
+    fontFamily: "Montserrat",
   },
   image: {
     width: 350,
@@ -62,22 +64,26 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+    fontFamily: "Montserrat",
   },
   buttonPrimary: {
     backgroundColor: "#6D83F2",
     paddingVertical: 12,
     paddingHorizontal: 30,
     borderRadius: 8,
+    fontFamily: "Montserrat",
   },
-  buttonSecondaryText: {  
+  buttonSecondaryText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+    fontFamily: "Montserrat",
   },
   footer: {
     marginTop: 30,
     fontSize: 12,
     color: "#888",
+    fontFamily: "Montserrat",
   },
 });
 

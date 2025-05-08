@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingVi
 import AuthApi from "./api/auth.api";
 import AlertService from "./hooks/alert";
 import { AxiosError } from "axios";
-import { useRouter } from 'expo-router';
+import { useRouter } from "expo-router";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -14,7 +14,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       await AuthApi.Login(email, password);
-      router.push('/dashboard/home');
+      router.push("/dashboard/home");
     } catch (error) {
       const err = error as AxiosError<any>;
       const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
@@ -31,7 +31,7 @@ const Login = () => {
 
       <View style={styles.inputContainer}>
         <Image source={require("../assets/images/email.png")} style={styles.inputIcon}></Image>
-        <TextInput style={styles .input} placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" placeholderTextColor="#525252" underlineColorAndroid="transparent"/>
+        <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" placeholderTextColor="#525252" underlineColorAndroid="transparent" />
       </View>
 
       <View style={styles.inputContainer}>
@@ -63,11 +63,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "bold",
     marginBottom: 5,
+    fontFamily: "Montserrat",
   },
   subtitle: {
     color: "#555",
     marginBottom: 40,
     fontSize: 14,
+    fontFamily: "Montserrat",
   },
   inputContainer: {
     flexDirection: "row",
@@ -80,6 +82,7 @@ const styles = StyleSheet.create({
     height: 50,
     elevation: 2,
     borderColor: "#00000",
+    fontFamily: "Montserrat",
   },
   inputIcon: {
     fontSize: 18,
@@ -91,7 +94,8 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: "#525252",
-    borderWidth: 0, 
+    borderWidth: 0,
+    fontFamily: "Montserrat",
   },
   loginButton: {
     backgroundColor: "#5f7cfb",
@@ -101,12 +105,14 @@ const styles = StyleSheet.create({
     marginTop: 40,
     width: "85%",
     elevation: 4,
+    fontFamily: "Montserrat"
   },
   loginText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
     textAlign: "center",
+    fontFamily: "Montserrat",
   },
 });
 
