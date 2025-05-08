@@ -101,10 +101,10 @@ const DashboardHome = () => {
               },
             }}
             theme={{
-              textSectionTitleColor: colors.black_60,  
-              dayTextColor: colors.black_70,           
-              todayTextColor: colors.primary,          
-              selectedDayTextColor: "white",          
+              textSectionTitleColor: colors.black_60,
+              dayTextColor: colors.black_70,
+              todayTextColor: colors.primary,
+              selectedDayTextColor: "white",
               selectedDayBackgroundColor: colors.primary,
               arrowColor: colors.primary,
             }}
@@ -133,9 +133,8 @@ const DashboardHome = () => {
             </View>
           ) : (
             <View style={styles.emptyContainer}>
-  <Text style={styles.emptyText}>Tidak Ada Order yang Tersedia</Text>
-</View>
-
+              <Text style={styles.emptyText}>Tidak Ada Order yang Tersedia</Text>
+            </View>
           )}
         </>
       )}
@@ -170,38 +169,6 @@ const styles = StyleSheet.create({
     color: colors.black_60,
     marginTop: 5,
     fontFamily: "Montserrat",
-  },
-  weekDaysContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 15,
-  },
-  weekDayItem: {
-    alignItems: "center",
-    width: 35,
-  },
-  weekDayText: {
-    fontSize: 10,
-    color: colors.black_60,
-    marginBottom: 5,
-  },
-  weekDayNumber: {
-    width: 25,
-    height: 25,
-    borderRadius: 13,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  selectedWeekDay: {
-    backgroundColor: colors.primary,
-  },
-  weekDayNumberText: {
-    fontSize: 12,
-    color: colors.black_70,
-  },
-  selectedWeekDayText: {
-    color: "#fff",
-    fontWeight: "bold",
   },
   filterBarContainer: {
     paddingHorizontal: 16,
@@ -268,8 +235,8 @@ const styles = StyleSheet.create({
   },
   emptyContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingHorizontal: 24,
     paddingVertical: 32,
     borderRadius: 16,
@@ -277,12 +244,11 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#6B7280', 
-    fontWeight: '600',
-    textAlign: 'center',
-    fontFamily: 'Montserrat'
+    color: "#6B7280",
+    fontWeight: "600",
+    textAlign: "center",
+    fontFamily: "Montserrat",
   },
-  
 });
 
 export default DashboardHome;
