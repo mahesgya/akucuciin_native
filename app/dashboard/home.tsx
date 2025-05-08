@@ -97,8 +97,16 @@ const DashboardHome = () => {
             markedDates={{
               [selectedDate ? selectedDate.toISOString().split("T")[0] : ""]: {
                 selected: true,
-                selectedColor: "blue",
+                selectedColor: colors.primary,
               },
+            }}
+            theme={{
+              textSectionTitleColor: colors.black_60,  
+              dayTextColor: colors.black_70,           
+              todayTextColor: colors.primary,          
+              selectedDayTextColor: "white",          
+              selectedDayBackgroundColor: colors.primary,
+              arrowColor: colors.primary,
             }}
             current={selectedDate ? selectedDate.toISOString().split("T")[0] : ""}
           />

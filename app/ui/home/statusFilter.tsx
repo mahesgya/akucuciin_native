@@ -93,8 +93,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: colors.gray,  
+    backgroundColor: colors.gray,
     marginRight: 8,
   },
   activeFilterButton: {
@@ -103,8 +102,8 @@ const styles = StyleSheet.create({
   },
   filterText: {
     fontSize: 12,
-    color: colors.black_60,
-    fontFamily: "Montserrat"
+    color: colors.black_70,
+    fontFamily: "Montserrat",
   },
   activeFilterText: {
     color: '#fff',
