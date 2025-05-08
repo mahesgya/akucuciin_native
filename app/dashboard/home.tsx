@@ -5,8 +5,8 @@ import { Feather } from "@expo/vector-icons";
 import { Calendar } from "react-native-calendars";
 
 import OrderApi from "../api/order.api";
-import OrderItem from "../ui/home/orderCard";
-import StatusFilter from "../ui/home/statusFilter";
+import OrderItem from "../ui/card/order.card";
+import StatusFilter from "../ui/filter/status.filter";
 import AlertService from "../hooks/alert";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";

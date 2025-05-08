@@ -1,6 +1,6 @@
-import { Slot } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
-import NavigationBar from '../ui/navigation.bar';
+import { Slot } from "expo-router";
+import { View, StyleSheet } from "react-native";
+import NavigationBar from "../ui/bar/navigation.bar";
 
 export default function AppLayout() {
   return (

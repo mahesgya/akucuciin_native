@@ -9,16 +9,16 @@ const NavigationBar = () => {
 
     const icons = {
         home: {
-          white: require('../../assets/images/home.white.png'),
-          blue: require('../../assets/images/home.blue.png'),
+          white: require('../../../assets/images/home.white.png'),
+          blue: require('../../../assets/images/home.blue.png'),
         },
         history: {
-          white: require('../../assets/images/history.white.png'),
-          blue: require('../../assets/images/history.blue.png'),
+          white: require('../../../assets/images/history.white.png'),
+          blue: require('../../../assets/images/history.blue.png'),
         },
         profile: {
-          white: require('../../assets/images/profile.white.png'),
-          blue: require('../../assets/images/profile.blue.png'),
+          white: require('../../../assets/images/profile.white.png'),
+          blue: require('../../../assets/images/profile.blue.png'),
         },
       } as const;
 
