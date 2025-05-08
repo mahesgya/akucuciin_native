@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
     },
     icon: {
-        width: 45,
-        height: 45,
+        width: 40,
+        height: 40,
         resizeMode: 'contain',
     },
     button: {
