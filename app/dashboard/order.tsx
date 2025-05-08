@@ -1,10 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 const Order = () => {
   return (
     <View>
-      INI ORDER
+      <Text>INI DASHBOARD ORDER</Text>
     </View>
   )
 }

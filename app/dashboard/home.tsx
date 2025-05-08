@@ -14,11 +14,13 @@ import { OrderInterface } from "../interface/order.interface";
 import { AxiosError } from "axios";
 
 const statusOptions = [
+  { label: "Pending", value: "pending", color: colors.pending },
   { label: "Penjemputan", value: "penjemputan", color: colors.penjemputan },
   { label: "Pencucian", value: "pencucian", color: colors.pencucian },
   { label: "Pengantaran", value: "pengantaran", color: colors.pencucian },
   { label: "Selesai", value: "selesai", color: colors.selesai },
   { label: "Kesalahan", value: "kesalahan", color: colors.kesalahan },
+  { label: "Batal", value: "batal", color: colors.batal },
 ];
 
 const DashboardHome = () => {
@@ -36,7 +38,7 @@ const DashboardHome = () => {
         setAccessToken(token);
 
         if (token) {
-          const response: OrderInterface[] = await OrderApi.getOrderByLaundry(token); 
+          const response: OrderInterface[] = await OrderApi.getOrderByLaundry(token);
           setOrders(response);
         } else {
           AlertService.error("Tidak ada token", "Token tidak ditemukan.");
@@ -59,15 +61,22 @@ const DashboardHome = () => {
   };
 
   const filteredOrders = orders.filter((order) => {
+    const orderDate = new Date(order.created_at);
+    const sameDay = orderDate.getDate() === selectedDate.getDate() && orderDate.getMonth() === selectedDate.getMonth() && orderDate.getFullYear() === selectedDate.getFullYear();
     const matchesSearch = searchText === "" || order.customer.name.toLowerCase().includes(searchText.toLowerCase()) || order.package.name.toLowerCase().includes(searchText.toLowerCase());
+
     const matchesStatus = selectedStatus === null || order.status === selectedStatus;
-    return matchesSearch && matchesStatus;
+
+    const matchesDate = sameDay;
+    return matchesSearch && matchesStatus && matchesDate;
   });
 
   const handleDateSelect = (date: Date) => {
     setSelectedDate(date);
     setShowCalendar(false);
   };
+
+  const handleDetailOrder = async (orderId: string) => {};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,10 +113,22 @@ const DashboardHome = () => {
 
             <StatusFilter options={statusOptions} selectedStatus={selectedStatus} onSelectStatus={setSelectedStatus} />
           </View>
+          {filteredOrders.length > 0 ? (
+            <View style={styles.ordersContainer}>
+              <FlatList
+                data={filteredOrders}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => <OrderItem order={item} onActionPress={() => handleDetailOrder(item.id)} />}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.ordersList}
+              />
+            </View>
+          ) : (
+            <View style={styles.emptyContainer}>
+  <Text style={styles.emptyText}>Tidak Ada Order yang Tersedia</Text>
+</View>
 
-          <View style={styles.ordersContainer}>
-            <FlatList data={filteredOrders} keyExtractor={(item) => item.id} renderItem={({ item }) => <OrderItem order={item} />} showsVerticalScrollIndicator={false} contentContainerStyle={styles.ordersList} />
-          </View>
+          )}
         </>
       )}
 
@@ -134,13 +155,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: colors.primary,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
   headerDate: {
     fontSize: 14,
     color: colors.black_60,
     marginTop: 5,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
   weekDaysContainer: {
     flexDirection: "row",
@@ -237,6 +258,23 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingBottom: 80,
   },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 24,
+    paddingVertical: 32,
+    borderRadius: 16,
+    margin: 24,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: '#6B7280', 
+    fontWeight: '600',
+    textAlign: 'center',
+    fontFamily: 'Montserrat'
+  },
+  
 });
 
 export default DashboardHome;

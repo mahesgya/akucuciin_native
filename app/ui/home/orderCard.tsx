@@ -79,11 +79,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.background,
     borderRadius: 10,
-    padding: 10    ,
+    padding: 10,
     marginVertical: 6,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    shadowColor: '#000',
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,
   },
   contentContainer: {
     flexDirection: "row",
@@ -131,7 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 7,
     paddingHorizontal: 8,
-    minWidth: 100,
+    minWidth: 90,
     borderRadius: 7,
   },
   statusText: {

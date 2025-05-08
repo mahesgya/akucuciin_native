@@ -7,7 +7,7 @@ export const colors = {
     black_40: "rgba(0, 0, 0, 0.4)",
     black_60: "rgba(0, 0, 0, 0.6)",
     black_70: "rgba(0, 0, 0, 0.7)",
-    background: "rgba(87, 143, 202, 0.2)",
+    background: "#DCE9F5",
     background_thin: "rgba(87, 143, 202, 0.1)",
     penjemputan: "rgba(87, 143, 202, 0.65)",
     pencucian: "#578FCA", 
