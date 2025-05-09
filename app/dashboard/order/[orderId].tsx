@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator } from "react-native";
 import OrderApi from "../../api/order.api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "@/app/interface/order.interface";
@@ -80,12 +80,11 @@ const OrderDetail = () => {
 
   if (loading) {
     return (
-      <View>
-        <Text>Loading...</Text>
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#1E90FF" />
       </View>
     );
   }
-
   return (
     <ScrollView style={styles.container}>
       {order && (
@@ -243,6 +242,11 @@ const OrderDetail = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   header: {
     fontSize: 24,

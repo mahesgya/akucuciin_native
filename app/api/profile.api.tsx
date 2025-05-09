@@ -3,7 +3,7 @@ import { config } from "@/config/env";
 
 const API_URL = config.apiUrl
 
-const profileApi = {
+const ProfileApi = {
     getProfile : async (accessToken:string) => {
         try {
             const response = await axios.get(`${API_URL}/api/laundry_partner/app/profile`, {
@@ -28,4 +28,4 @@ const profileApi = {
     }
 }
 
-export default profileApi
+export default ProfileApi

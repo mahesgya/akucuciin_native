@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, TextInput, Platform, StatusBar } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, TextInput, Platform, StatusBar, ActivityIndicator } from "react-native";
 import { AxiosError } from "axios";
 import { colors } from "../constants/colors";
 import { Feather } from "@expo/vector-icons";
@@ -33,10 +33,12 @@ const DashboardHome = () => {
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
+        setLoading(true);
         const token = await AsyncStorage.getItem("accessToken");
         setAccessToken(token);
 
@@ -50,6 +52,8 @@ const DashboardHome = () => {
         const err = error as AxiosError<any>;
         const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
         AlertService.error("Gagal Mendapatkan data order", message);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -78,6 +82,15 @@ const DashboardHome = () => {
       params: { orderId },
     });
   };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#1E90FF" />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
@@ -151,6 +164,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerContainer: {
     paddingHorizontal: 16,
