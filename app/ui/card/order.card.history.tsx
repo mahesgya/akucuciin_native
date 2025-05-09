@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { colors } from "../../constants/colors";
 import { OrderInterface } from "@/app/interface/order.interface";
-import { formatDate } from "@/app/hooks/format.date";
+import { formatDate } from "@/app/hooks/format";
 import { getStatusColor, getTextColor } from "@/app/hooks/color";
 
 interface OrderItemProps {
@@ -20,19 +20,15 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
           <Image source={defaultIcon} style={styles.icon} resizeMode="contain" />
         </View>
         <View style={styles.detailsContainer}>
-          <Text style={styles.orderName}>
-            {order.customer.name} 
-          </Text>
+          <Text style={styles.orderName}>{order.customer.name}</Text>
           <Text style={styles.orderDetails}>
             {order.package.name} - {order.package.price_text}
           </Text>
-          <Text style={styles.orderDate}>
-           {formatDate(new Date(order.created_at))}
-          </Text>
+          <Text style={styles.orderDate}>{formatDate(new Date(order.created_at))}</Text>
         </View>
       </View>
 
-      <View style={styles.statusContainer} >
+      <View style={styles.statusContainer}>
         <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
           <Text style={[styles.statusText, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
         </View>
@@ -40,7 +36,6 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
     </TouchableOpacity>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -51,7 +46,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
@@ -83,19 +78,19 @@ const styles = StyleSheet.create({
     color: colors.primary,
     marginBottom: 4,
     fontFamily: "Montserrat",
-    fontWeight: '700'
+    fontWeight: "700",
   },
   orderDate: {
     fontSize: 10,
     color: colors.black_40,
     marginBottom: 4,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
   orderDetails: {
     fontSize: 10,
     color: colors.black_60,
     marginBottom: 4,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
   statusContainer: {
     flexDirection: "row",
@@ -113,7 +108,7 @@ const styles = StyleSheet.create({
     textShadowColor: "#000",
     textShadowOffset: { width: 0.1, height: 0.1 },
     textShadowRadius: 1,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
 });
 

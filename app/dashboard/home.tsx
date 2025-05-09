@@ -10,7 +10,7 @@ import OrderApi from "../api/order.api";
 import OrderCardHome from "../ui/card/order.card.home";
 import StatusFilter from "../ui/filter/status.filter";
 import AlertService from "../hooks/alert";
-import { formatDate } from "../hooks/format.date";
+import { formatDate } from "../hooks/format";
 import { OrderInterface } from "../interface/order.interface";
 import { useRouter } from "expo-router";
 
@@ -76,7 +76,7 @@ const DashboardHome = () => {
     router.push({
       pathname: "/dashboard/order/[orderId]",
       params: { orderId },
-    });    
+    });
   };
   return (
     <SafeAreaView style={styles.container}>
