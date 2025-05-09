@@ -8,6 +8,7 @@ import { AxiosError } from "axios";
 import { formatDate } from "@/app/hooks/format";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { colors } from "@/app/constants/colors";
+import { formatHarga } from "@/app/hooks/format";
 
 const OrderDetail = () => {
   const router = useRouter();
@@ -151,7 +152,7 @@ const OrderDetail = () => {
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{formatDate(new Date(order.created_at))}</Text>
           <Text style={styles.headerPackage}>{order.package.name}</Text>
-          <Text style={styles.headerPrice}>{order.price ? `Rp${order.price}` : "Belum Input Harga"}</Text>
+          <Text style={styles.headerPrice}>{order.price ? formatHarga(order.price) : "Belum Input Harga"}</Text>
 
           <View style={styles.detailContainer}>
             <View style={styles.sectionContainer}>
@@ -203,7 +204,7 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Harga:</Text>
-                <Text style={styles.value}>Rp{order.price}</Text>
+                <Text style={styles.value}>{order.price !== null ? formatHarga(order.price) : "Belum Input Harga"} </Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Berat:</Text>
@@ -264,6 +265,7 @@ const OrderDetail = () => {
             <View style={styles.modalContainer}>
               <View style={styles.modalContent}>
                 <Text style={styles.modalTitle}>Edit Harga</Text>
+                <Text style={styles.modalNotes}>Notes: Harga Akan Langsung Terkirim Ke Customer Harap Jangan Melakukan Kesalahan</Text>
 
                 <Text style={styles.inputLabel}>Harga (Rp):</Text>
                 <TextInput
@@ -405,10 +407,17 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: "bold",
-    marginBottom: 15,
+    marginBottom: 5,
     textAlign: "center",
     fontFamily: "Montserrat",
     color: colors.primary,
+  },
+  modalNotes:{
+    fontSize: 12,
+    marginBottom: 15,
+    textAlign: "center",
+    fontFamily: "Montserrat",
+    color: colors.batal,
   },
   inputLabel: {
     fontSize: 14,
@@ -429,7 +438,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   cancelButton: {
-    backgroundColor: "#ccc",
+    backgroundColor: colors.batal,
   },
   saveButton: {
     backgroundColor: colors.primary,
