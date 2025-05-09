@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView } from "react-native";
 import OrderApi from "../../api/order.api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "@/app/interface/order.interface";
@@ -9,29 +9,39 @@ import { formatDate } from "@/app/hooks/format";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { colors } from "@/app/constants/colors";
 import { formatHarga } from "@/app/hooks/format";
+import { getStatusColor, getTextColor } from "@/app/hooks/color";
+import { useOrderUpdate } from "@/app/hooks/use.order.update";
 
 const OrderDetail = () => {
   const router = useRouter();
-
   const { orderId } = useLocalSearchParams<{ orderId: string }>();
-
   const [order, setOrder] = useState<OrderInterface>();
   const [status, setStatus] = useState<string>("");
-  const [weight, setWeight] = useState<number | null>(null);
-  const [price, setPrice] = useState<number | null>(null);
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [weight, setWeight] = useState<number>(0);
+  const [price, setPrice] = useState<number>(0);
+  const [accessToken, setAccessToken] = useState<string>("");
 
   const [statusModalVisible, setStatusModalVisible] = useState<boolean>(false);
   const [priceModalVisible, setPriceModalVisible] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+
+  const { handleStatusUpdate, handlePriceUpdate, loading } = useOrderUpdate(accessToken, orderId);
+
   const statusOptions = ["penjemputan", "pencucian", "pengantaran", "selesai"];
+
+  const handleUpdateStatus = async () => {
+    await handleStatusUpdate(status, weight, order, setOrder, setStatusModalVisible);
+  };
+
+  const handleUpdatePrice = async () => {
+    await handlePriceUpdate(price, order, setOrder, setPriceModalVisible);
+  };
 
   useEffect(() => {
     const fetchOrderDetail = async () => {
       try {
         const token = await AsyncStorage.getItem("accessToken");
-        setAccessToken(token);
         if (token) {
+          setAccessToken(token);
           const orderData: OrderInterface[] = await OrderApi.getOrderById(orderId, token);
           const currentOrder = orderData[0];
 
@@ -60,75 +70,6 @@ const OrderDetail = () => {
     setPriceModalVisible(true);
   };
 
-  const handleStatusUpdate = async () => {
-    if (!accessToken || !orderId) {
-      AlertService.error("Error", "Token atau Order ID tidak ditemukan");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const formData = {
-        status: status,
-        weight: weight,
-      };
-
-      await OrderApi.updateStatusOrder(formData, orderId, accessToken);
-
-      if (order) {
-        setOrder({
-          ...order,
-          status: status,
-          weight: weight,
-        });
-      }
-
-      setStatusModalVisible(false);
-      AlertService.success("Success", "Berhasil Memperbarui Status dan Berat");
-    } catch (error) {
-      console.log(error);
-      const err = error as AxiosError<any>;
-      const message = err.response?.data?.errors || "Gagal Memperbarui Status dan Berat";
-      AlertService.error("Failed", message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handlePriceUpdate = async () => {
-    if (!accessToken || !orderId) {
-      AlertService.error("Error", "Token atau Order ID tidak ditemukan");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const formData = {
-        price: price,
-      };
-
-      console.log(formData);
-      await OrderApi.updatePriceOrder(formData, orderId, accessToken);
-
-      if (order) {
-        setOrder({
-          ...order,
-          price: price,
-        });
-      }
-
-      setPriceModalVisible(false);
-      AlertService.success("Success", "Harga Berhasil di Perbarui");
-    } catch (error) {
-      const err = error as AxiosError<any>;
-      const message = err.response?.data?.errors || "Gagal Memperbarui Harga";
-      AlertService.error("Failed", message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   if (!order) {
     return (
       <View>
@@ -146,13 +87,16 @@ const OrderDetail = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {order && (
         <View>
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{formatDate(new Date(order.created_at))}</Text>
           <Text style={styles.headerPackage}>{order.package.name}</Text>
-          <Text style={styles.headerPrice}>{order.price ? formatHarga(order.price) : "Belum Input Harga"}</Text>
+          <Text style={styles.headerPrice}>{price !== 0 ? formatHarga(Number(price)) : "Belum Ada Harga"}</Text>
+          <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
+            <Text style={[styles.headerStatus, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
+          </View>
 
           <View style={styles.detailContainer}>
             <View style={styles.sectionContainer}>
@@ -181,7 +125,7 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Kode Promo:</Text>
-                <Text style={styles.value}>{order.coupon_code}</Text>
+                <Text style={styles.value}>{order.coupon_code !== "" ? order.coupon_code : "Tidak Ada Kode Promo"}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Paket:</Text>
@@ -189,7 +133,7 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Note:</Text>
-                <Text style={styles.value}>{order.note}</Text>
+                <Text style={styles.value}>{order.note !== null ? order.note : "Tidak Ada Notes"}</Text>
               </View>
             </View>
 
@@ -204,11 +148,11 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Harga:</Text>
-                <Text style={styles.value}>{order.price !== null ? formatHarga(order.price) : "Belum Input Harga"} </Text>
+                <Text style={styles.value}>{price !== null && price !== 0 ? formatHarga(Number(order.price)) : <Text style={styles.warning}>Belum ada harga</Text>}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Berat:</Text>
-                <Text style={styles.value}>{order.weight} Kg</Text>
+                <Text style={styles.value}>{weight !== null && weight !== 0 ? `${weight} kg` : <Text style={styles.warning}>Belum ada berat</Text>}</Text>
               </View>
             </View>
 
@@ -242,8 +186,8 @@ const OrderDetail = () => {
                   style={styles.input}
                   value={weight !== null ? weight.toString() : ""}
                   onChangeText={(text) => {
-                    const parsed = parseInt(text, 10);
-                    setWeight(isNaN(parsed) ? null : parsed);
+                    const parsed = text === "" ? 0 : parseInt(text, 10);
+                    setWeight(isNaN(parsed) ? 0 : parsed);
                   }}
                   keyboardType="numeric"
                   placeholder="Input berat (Kg)"
@@ -253,7 +197,7 @@ const OrderDetail = () => {
                   <TouchableOpacity style={[styles.modalButton, styles.cancelButton]} onPress={() => setStatusModalVisible(false)} disabled={loading}>
                     <Text style={styles.buttonText}>Batal</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={[styles.modalButton, styles.saveButton]} onPress={handleStatusUpdate} disabled={loading}>
+                  <TouchableOpacity style={[styles.modalButton, styles.saveButton]} onPress={handleUpdateStatus} disabled={loading}>
                     <Text style={styles.buttonText}>{loading ? "Menyimpan..." : "Simpan"}</Text>
                   </TouchableOpacity>
                 </View>
@@ -273,7 +217,7 @@ const OrderDetail = () => {
                   value={price !== null ? price.toString() : ""}
                   onChangeText={(text) => {
                     const parsed = parseInt(text, 10);
-                    setPrice(isNaN(parsed) ? null : parsed);
+                    setPrice(isNaN(parsed) ? 0 : parsed);
                   }}
                   keyboardType="numeric"
                   placeholder="Input harga"
@@ -283,7 +227,7 @@ const OrderDetail = () => {
                   <TouchableOpacity style={[styles.modalButton, styles.cancelButton]} onPress={() => setPriceModalVisible(false)} disabled={loading}>
                     <Text style={styles.buttonText}>Batal</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={[styles.modalButton, styles.saveButton]} onPress={handlePriceUpdate} disabled={loading}>
+                  <TouchableOpacity style={[styles.modalButton, styles.saveButton]} onPress={handleUpdatePrice} disabled={loading}>
                     <Text style={styles.buttonText}>{loading ? "Menyimpan..." : "Simpan"}</Text>
                   </TouchableOpacity>
                 </View>
@@ -292,7 +236,7 @@ const OrderDetail = () => {
           </Modal>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -320,12 +264,28 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
   },
   headerPrice: {
-    fontSize: 20,
+    fontSize: 16,
     color: colors.selesai,
     position: "absolute",
-    right: 20,
-    top: 50,
+    right: 8,
+    top: 100,
     marginBottom: 4,
+    fontFamily: "Montserrat",
+  },
+  statusContainer: {
+    paddingVertical: 7,
+    paddingHorizontal: 8,
+    borderRadius: 7,
+    maxWidth: 140,
+    marginTop: 8,
+  },
+  headerStatus: {
+    fontSize: 16,
+    color: "#ffffff",
+    textAlign: "center",
+    textShadowColor: "#000",
+    textShadowOffset: { width: 0.1, height: 0.1 },
+    textShadowRadius: 1,
     fontFamily: "Montserrat",
   },
   detailContainer: {
@@ -358,7 +318,7 @@ const styles = StyleSheet.create({
     textAlign: "right",
     color: colors.black_70,
     fontFamily: "Montserrat",
-    fontSize: 10,
+    fontSize: 12,
   },
   input: {
     borderWidth: 1,
@@ -383,9 +343,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.selesai,
   },
   buttonText: {
-    color: "#fff",
+    color: "#ffffff",
     fontFamily: "Montserrat",
-    fontWeight: "bold",
+    fontWeight: "semibold",
+    fontSize: 12,
   },
   modalContainer: {
     flex: 1,
@@ -412,7 +373,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
     color: colors.primary,
   },
-  modalNotes:{
+  modalNotes: {
     fontSize: 12,
     marginBottom: 15,
     textAlign: "center",
@@ -469,6 +430,12 @@ const styles = StyleSheet.create({
   selectedStatusText: {
     color: colors.primary,
     fontWeight: "bold",
+  },
+  warning: {
+    color: "#FFA500",
+    fontStyle: "italic",
+    fontWeight: "500",
+    fontSize: 12,
   },
 });
 
