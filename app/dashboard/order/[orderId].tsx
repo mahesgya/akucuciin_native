@@ -167,7 +167,7 @@ const OrderDetail = () => {
             </View>
           </View>
 
-          <Modal animationType="slide" transparent={true} visible={statusModalVisible} onRequestClose={() => setStatusModalVisible(false)}>
+          <Modal animationType="fade" transparent={true} visible={statusModalVisible} onRequestClose={() => setStatusModalVisible(false)}>
             <View style={styles.modalContainer}>
               <View style={styles.modalContent}>
                 <Text style={styles.modalTitle}>Edit Status dan Berat</Text>
@@ -205,7 +205,7 @@ const OrderDetail = () => {
             </View>
           </Modal>
 
-          <Modal animationType="slide" transparent={true} visible={priceModalVisible} onRequestClose={() => setPriceModalVisible(false)}>
+          <Modal animationType="fade" transparent={true} visible={priceModalVisible} onRequestClose={() => setPriceModalVisible(false)}>
             <View style={styles.modalContainer}>
               <View style={styles.modalContent}>
                 <Text style={styles.modalTitle}>Edit Harga</Text>
