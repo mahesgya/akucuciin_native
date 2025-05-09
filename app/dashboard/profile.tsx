@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   errorText: {
-    fontSize: 16,
+    fontSize: 12,
     color: "red",
     marginBottom: 20,
     fontFamily: "Montserrat",
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
   },
   headerTitle: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
     color: "white",
     fontFamily: "Montserrat",
@@ -206,17 +206,17 @@ const styles = StyleSheet.create({
   infoLabel: {
     fontWeight: "bold",
     marginLeft: 10,
-    fontSize: 14,
+    fontSize: 12,
     color: colors.primary_65,
     fontFamily: "Montserrat",
   },
   infoValue: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.primary,
     fontFamily: "Montserrat",
   },
   linkText: {
-    fontSize: 16,
+    fontSize: 14,
     color: "#3674B5",
     fontFamily: "Montserrat",
   },
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   logoutText: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "Montserrat",
   },
   infoValueRow: {

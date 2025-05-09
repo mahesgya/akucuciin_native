@@ -6,12 +6,12 @@ const Index = () => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/images/LogoAkucuciin.png")} style={styles.imageLogo} />
+      <Image source={require("../assets/images/logo.panjang.png")} style={styles.imageLogo} />
 
       <Text style={styles.title}>Ga Sempet Nyuci?</Text>
       <Text style={styles.subtitle}>sini Akucuciin</Text>
 
-      <Image source={require("../assets/images/Mesin Cuci.png")} style={styles.image} />
+      <Image source={require("../assets/images/mesin.cuci.png")} style={styles.image} />
 
       <TouchableOpacity style={styles.buttonPrimary} onPress={() => router.push("/login")}>
         <Text style={styles.buttonPrimaryText}>LOGIN</Text>

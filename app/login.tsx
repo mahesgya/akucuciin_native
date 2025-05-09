@@ -24,18 +24,18 @@ const Login = () => {
 
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
-      <Image source={require("../assets/images/LogoAkucuciin.png")} style={styles.logo} resizeMode="contain" />
+      <Image source={require("../assets/images/logo.panjang.png")} style={styles.logo} resizeMode="contain" />
 
       <Text style={styles.title}>LOGIN</Text>
       <Text style={styles.subtitle}>Silahkan masukan Email dan Password anda</Text>
 
       <View style={styles.inputContainer}>
-        <Image source={require("../assets/images/email.png")} style={styles.inputIcon}></Image>
+        <Image source={require("../assets/images/email.login.png")} style={styles.inputIcon}></Image>
         <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={setEmail} autoCapitalize="none" placeholderTextColor="#525252" underlineColorAndroid="transparent" />
       </View>
 
       <View style={styles.inputContainer}>
-        <Image source={require("../assets/images/passwordReg.png")} style={styles.inputIcon}></Image>
+        <Image source={require("../assets/images/Password.png")} style={styles.inputIcon}></Image>
         <TextInput style={styles.input} placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry placeholderTextColor="#525252" underlineColorAndroid="transparent" />
       </View>
 
