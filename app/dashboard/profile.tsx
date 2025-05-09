@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import ProfileApi from "../api/profile.api";
-import { colors } from "../constants/colors";
+import { AxiosError } from "axios";
+import { router } from 'expo-router';
 
+import AuthApi from "../api/auth.api";
+import ProfileApi from "../api/profile.api";
+import AlertService from "../hooks/alert";
+
+import { colors } from "../constants/colors";
 import { LaundryProfile } from "../interface/profile.interface";
 
 const DashboardProfile: React.FC = () => {
   const [profile, setProfile] = useState<LaundryProfile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const navigation = useNavigation();
-
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         setLoading(true);
         const token = await AsyncStorage.getItem("accessToken");
-        if (!token) {
-          throw new Error("Authentication token not found");
+
+        if (token) {
+          const profileData = await ProfileApi.getProfile(token);
+          setProfile(profileData);
+        } else {
+          AlertService.error("Tidak ada token", "Token tidak ditemukan.");
         }
-        const profileData = await ProfileApi.getProfile(token);
-        setProfile(profileData);
-      } catch (err) {
-        console.error("Error fetching profile:", err);
+
+      } catch (error) {
+        const err = error as AxiosError<any>;
+        const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
+        AlertService.error("Gagal Mendapatkan data order", message);
       } finally {
         setLoading(false);
       }
@@ -35,15 +42,24 @@ const DashboardProfile: React.FC = () => {
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.removeItem("accessToken");
-    } catch (err) {
-      console.error("Error during logout:", err);
-      Alert.alert("Error", "Failed to log out");
+      const token = await AsyncStorage.getItem("refreshToken");
+
+      if (token) {
+        await AuthApi.Logout(token);
+      } else {
+        AlertService.error("Tidak ada token", "Token tidak ditemukan.");
+      }
+      router.replace('/');
+      
+    } catch (error) {
+      const err = error as AxiosError<any>;
+      const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
+      AlertService.error("Gagal Mendapatkan data order", message);
     }
   };
 
   const handleOpenMaps = () => {
-    Alert.alert("Opening Maps", "This would open Google Maps with your location");
+    Alert.alert("Opening Maps", "Akan Membuka Maps Lokasi Google");
   };
 
   if (loading) {
@@ -132,9 +148,9 @@ const DashboardProfile: React.FC = () => {
       </View>
 
       <View style={styles.logoutContainer}>
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutText}>Log Out</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <Text style={styles.logoutText}>Log Out</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -241,7 +257,7 @@ const styles = StyleSheet.create({
   },
   logoutContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     alignItems: "flex-end",
   },
   logoutButton: {
@@ -251,7 +267,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 10,
     alignItems: "center",
-    width: 100
+    width: 100,
   },
   logoutText: {
     color: "white",
