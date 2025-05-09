@@ -5,7 +5,7 @@ export const formatDate = (date: Date): string => {
   return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 };
 
-export const formatHarga = (harga: number): string => {
+export const formatPrice = (harga: number): string => {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",

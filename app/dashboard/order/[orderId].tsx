@@ -8,7 +8,7 @@ import { AxiosError } from "axios";
 import { formatDate } from "@/app/hooks/format";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { colors } from "@/app/constants/colors";
-import { formatHarga } from "@/app/hooks/format";
+import { formatPrice } from "@/app/hooks/format";
 import { getStatusColor, getTextColor } from "@/app/hooks/color";
 import { useOrderUpdate } from "@/app/hooks/use.order.update";
 
@@ -62,11 +62,11 @@ const OrderDetail = () => {
     fetchOrderDetail();
   }, [orderId, accessToken]);
 
-  const handleEditStatusAndBerat = () => {
+  const handleEditStatusAndWeight = () => {
     setStatusModalVisible(true);
   };
 
-  const handleEditHarga = () => {
+  const handleEditPrice = () => {
     setPriceModalVisible(true);
   };
 
@@ -93,7 +93,7 @@ const OrderDetail = () => {
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{formatDate(new Date(order.created_at))}</Text>
           <Text style={styles.headerPackage}>{order.package.name}</Text>
-          <Text style={styles.headerPrice}>{price !== 0 ? formatHarga(Number(price)) : "Belum Ada Harga"}</Text>
+          <Text style={styles.headerPrice}>{price !== 0 ? formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
           <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
             <Text style={[styles.headerStatus, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
           </View>
@@ -148,7 +148,7 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Harga:</Text>
-                <Text style={styles.value}>{price !== null && price !== 0 ? formatHarga(Number(order.price)) : <Text style={styles.warning}>Belum ada harga</Text>}</Text>
+                <Text style={styles.value}>{price !== null && price !== 0 ? formatPrice(Number(order.price)) : <Text style={styles.warning}>Belum ada harga</Text>}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Berat:</Text>
@@ -157,11 +157,11 @@ const OrderDetail = () => {
             </View>
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={handleEditStatusAndBerat} style={styles.button}>
+              <TouchableOpacity onPress={handleEditStatusAndWeight} style={styles.button}>
                 <Text style={styles.buttonText}>Edit Status dan Berat</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={handleEditHarga} style={[styles.button, styles.priceButton]}>
+              <TouchableOpacity onPress={handleEditPrice} style={[styles.button, styles.priceButton]}>
                 <Text style={styles.buttonText}>Edit Harga</Text>
               </TouchableOpacity>
             </View>
