@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator, Linking } from "react-native";
+import { View, Text, Image , StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator, Linking } from "react-native";
 import OrderApi from "../../api/order.api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "@/app/interface/order.interface";
@@ -42,7 +42,7 @@ const OrderDetail = () => {
         const token = await AsyncStorage.getItem("accessToken");
         if (token) {
           setAccessToken(token);
-          
+
           const orderData: OrderInterface = await OrderApi.getOrderById(orderId, token);
 
           setOrder(orderData);
@@ -89,6 +89,9 @@ const OrderDetail = () => {
     <ScrollView style={styles.container}>
       {order && (
         <View>
+          <TouchableOpacity onPress={() => router.back()}>
+            <Image source={require("../../../assets/images/back.png")} />
+          </TouchableOpacity>
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{formatDate(new Date(order.created_at))}</Text>
           <Text style={styles.headerPackage}>
