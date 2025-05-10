@@ -91,7 +91,7 @@ const OrderDetail = () => {
         <View>
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{formatDate(new Date(order.created_at))}</Text>
-          <Text style={styles.headerPackage}>{order.package.name}</Text>
+          <Text style={styles.headerPackage}>{order.package.name} - {order.package.price_text}</Text>
           <Text style={styles.headerPrice}>{price !== 0 ? formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
           <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
             <Text style={[styles.headerStatus, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
