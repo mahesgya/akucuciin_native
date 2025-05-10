@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, SafeAreaView, FlatList, TextInput, Platform, StatusBar } from "react-native";
-import colors  from "../../constants/colors";
+import colors from "../../constants/colors";
 import { Feather } from "@expo/vector-icons";
 
 import OrderApi from "../../api/order.api";
@@ -8,7 +8,7 @@ import OrderCardHistory from "../../ui/card/order.card.history";
 import AlertService from "../../hooks/alert";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import OrderInterface from "../../interface/order.interface";
+import { OrderInterface } from "../../interface/order.interface";
 import { AxiosError } from "axios";
 import MonthFilter from "../../ui/filter/month.filter";
 import YearFilter from "../../ui/filter/year.filter";

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, TextInput, Platform, StatusBar, ActivityIndicator } from "react-native";
 import { AxiosError } from "axios";
-import  colors  from "../constants/colors";
+import colors from "../constants/colors";
 import { Feather } from "@expo/vector-icons";
 import { Calendar } from "react-native-calendars";
 
@@ -11,7 +11,7 @@ import OrderCardHome from "../ui/card/order.card.home";
 import StatusFilter from "../ui/filter/status.filter";
 import AlertService from "../hooks/alert";
 import FormatUtils from "../hooks/format";
-import OrderInterface  from "../interface/order.interface";
+import { OrderInterface } from "../interface/order.interface";
 import { useRouter } from "expo-router";
 
 const statusOptions = [
@@ -52,7 +52,7 @@ const DashboardHome = () => {
         const err = error as AxiosError<any>;
         const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
         AlertService.error("Gagal Mendapatkan data order", message);
-      }finally{
+      } finally {
         setLoading(false);
       }
     };

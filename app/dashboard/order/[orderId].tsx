@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image , StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator, Linking } from "react-native";
 import OrderApi from "../../api/order.api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import OrderInterface from "@/app/interface/order.interface";
@@ -7,10 +7,10 @@ import AlertService from "@/app/hooks/alert";
 import { AxiosError } from "axios";
 import FormatUtils from "@/app/hooks/format";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import  colors  from "@/app/constants/colors";
+import colors from "@/app/constants/colors";
 
 import StatusUtils from "@/app/hooks/color";
-import  useOrderUpdate  from "@/app/hooks/use.order.update";
+import useOrderUpdate from "@/app/hooks/use.order.update";
 
 const OrderDetail = () => {
   const router = useRouter();

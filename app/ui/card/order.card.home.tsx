@@ -1,9 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import colors  from "../../constants/colors";
+import colors from "../../constants/colors";
 import OrderInterface from "@/app/interface/order.interface";
 import StatusUtils from "@/app/hooks/color";
-
 
 interface OrderItemProps {
   order: OrderInterface;
@@ -11,13 +10,11 @@ interface OrderItemProps {
 }
 
 const formatTime = (date: Date): string => {
-
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
 
   return `${hours}:${minutes}`;
 };
-
 
 const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
   const defaultIcon = require("../../../assets/images/LogoAkucuciin2.png");
@@ -38,7 +35,7 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
         </View>
       </View>
 
-      <View style={styles.statusContainer} >
+      <View style={styles.statusContainer}>
         <View style={[styles.statusContainer, { backgroundColor: StatusUtils.getStatusColor(order.status) }]}>
           <Text style={[styles.statusText, { color: StatusUtils.getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
         </View>
@@ -56,7 +53,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
@@ -88,19 +85,19 @@ const styles = StyleSheet.create({
     color: colors.primary,
     marginBottom: 4,
     fontFamily: "Montserrat",
-    fontWeight: '700'
+    fontWeight: "700",
   },
   orderTime: {
     fontSize: 10,
     color: colors.black_40,
     marginBottom: 4,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
   orderDetails: {
     fontSize: 10,
     color: colors.black_60,
     marginBottom: 4,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
   statusContainer: {
     flexDirection: "row",
@@ -118,7 +115,7 @@ const styles = StyleSheet.create({
     textShadowColor: "#000",
     textShadowOffset: { width: 0.1, height: 0.1 },
     textShadowRadius: 1,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
 });
 

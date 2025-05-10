@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AxiosError } from "axios";
-import { router } from 'expo-router';
+import { router } from "expo-router";
 
 import AuthApi from "../api/auth.api";
 import ProfileApi from "../api/profile.api";
 import AlertService from "../hooks/alert";
 
-import  colors  from "../constants/colors";
+import colors from "../constants/colors";
 import { LaundryProfile } from "../interface/profile.interface";
 
 const DashboardProfile: React.FC = () => {
@@ -27,7 +27,6 @@ const DashboardProfile: React.FC = () => {
         } else {
           AlertService.error("Tidak ada token", "Token tidak ditemukan.");
         }
-
       } catch (error) {
         const err = error as AxiosError<any>;
         const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
@@ -49,8 +48,7 @@ const DashboardProfile: React.FC = () => {
       } else {
         AlertService.error("Tidak ada token", "Token tidak ditemukan.");
       }
-      router.replace('/');
-      
+      router.replace("/");
     } catch (error) {
       const err = error as AxiosError<any>;
       const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";

@@ -1,3 +1,6 @@
+import React from 'react';
+import { View, Text } from 'react-native';
+
 export interface LaundryProfile {
   id: string;
   name: string;
@@ -14,4 +17,13 @@ export interface LaundryProfile {
   updated_at: string;
 }
 
-export default LaundryProfile
+const LaundryInterfaceScreen = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Laundry Interface Screen</Text>
+      <Text>This is a placeholder component to satisfy router requirements.</Text>
+    </View>
+  );
+};
+
+export default LaundryInterfaceScreen;

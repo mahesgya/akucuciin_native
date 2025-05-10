@@ -1,4 +1,7 @@
-interface Customer {
+import React from 'react';
+import { View, Text } from 'react-native';
+
+export interface Customer {
     id: string;
     name: string;
     email: string;
@@ -6,7 +9,7 @@ interface Customer {
     telephone: string;
 }
 
-interface LaundryPartner {
+export interface LaundryPartner {
     id: string;
     name: string;
     email: string;
@@ -17,21 +20,21 @@ interface LaundryPartner {
     maps_pinpoint: string;
 }
 
-interface Package {
+export interface Package {
     id: string;
     name: string;
     price_text: string;
     description: string;
 }
 
-interface Driver {
+export interface Driver {
     id: string | null;
     name: string | null;
     email: string | null;
     telephone: string | null;
 }
 
-interface OrderInterface {
+export interface OrderInterface {
     id: string;
     content: string;
     status: string;
@@ -52,4 +55,13 @@ interface OrderInterface {
     driver: Driver;
 }
 
-export default OrderInterface
+const OrderInterfaceScreen = () => {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Order Interface Screen</Text>
+      <Text>This is a placeholder component to satisfy router requirements.</Text>
+    </View>
+  );
+};
+
+export default OrderInterfaceScreen;
