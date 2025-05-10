@@ -1,4 +1,4 @@
-export const colors = {
+const colors = {
     primary: "#3674B5",
     primary_65: "rgba(87, 143, 202, 0.65)",
     primary_90: "rgba(87, 143, 202, 0.90)",
@@ -18,3 +18,5 @@ export const colors = {
     batal: "#E52020",
     white: "#FFFFFF"
 } 
+
+export default colors

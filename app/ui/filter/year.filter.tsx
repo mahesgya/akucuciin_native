@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Modal, FlatList } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { colors } from "../../constants/colors";
+import colors from "../../constants/colors";
 
 interface YearFilterProps {
   selectedYear: number;

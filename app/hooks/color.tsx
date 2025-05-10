@@ -1,6 +1,6 @@
-import { colors } from "../constants/colors";
+import  colors  from "../constants/colors";
 
-export const getStatusColor = (status: string): string => {
+const getStatusColor = (status: string): string => {
   switch (status.toLowerCase()) {
     case "selesai":
       return colors.selesai;
@@ -19,7 +19,7 @@ export const getStatusColor = (status: string): string => {
   }
 };
 
-export const getTextColor = (status: string): string => {
+const getTextColor = (status: string): string => {
   switch (status.toLowerCase()) {
     case "pending":
       return colors.white;
@@ -28,4 +28,9 @@ export const getTextColor = (status: string): string => {
     default:
       return colors.white;
   }
+};
+
+export default {
+  getStatusColor,
+  getTextColor
 };

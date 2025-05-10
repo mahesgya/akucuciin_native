@@ -2,15 +2,15 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image , StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator, Linking } from "react-native";
 import OrderApi from "../../api/order.api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { OrderInterface } from "@/app/interface/order.interface";
+import OrderInterface from "@/app/interface/order.interface";
 import AlertService from "@/app/hooks/alert";
 import { AxiosError } from "axios";
-import { formatDate } from "@/app/hooks/format";
+import FormatUtils from "@/app/hooks/format";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { colors } from "@/app/constants/colors";
-import { formatPrice } from "@/app/hooks/format";
-import { getStatusColor, getTextColor } from "@/app/hooks/color";
-import { useOrderUpdate } from "@/app/hooks/use.order.update";
+import  colors  from "@/app/constants/colors";
+
+import StatusUtils from "@/app/hooks/color";
+import  useOrderUpdate  from "@/app/hooks/use.order.update";
 
 const OrderDetail = () => {
   const router = useRouter();
@@ -93,13 +93,13 @@ const OrderDetail = () => {
             <Image source={require("../../../assets/images/back.png")} />
           </TouchableOpacity>
           <Text style={styles.header}>{order.customer.name}</Text>
-          <Text style={styles.headerDate}>{formatDate(new Date(order.created_at))}</Text>
+          <Text style={styles.headerDate}>{FormatUtils.formatDate(new Date(order.created_at))}</Text>
           <Text style={styles.headerPackage}>
             {order.package.name} - {order.package.price_text}
           </Text>
-          <Text style={styles.headerPrice}>{price !== 0 ? formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
-          <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
-            <Text style={[styles.headerStatus, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
+          <Text style={styles.headerPrice}>{price !== 0 ? FormatUtils.formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
+          <View style={[styles.statusContainer, { backgroundColor: StatusUtils.getStatusColor(order.status) }]}>
+            <Text style={[styles.headerStatus, { color: StatusUtils.getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
           </View>
 
           <View style={styles.detailContainer}>
@@ -114,7 +114,7 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Tanggal:</Text>
-                <Text style={styles.value}>{formatDate(new Date(order.created_at))}</Text>
+                <Text style={styles.value}>{FormatUtils.formatDate(new Date(order.created_at))}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Telephone:</Text>
@@ -167,11 +167,11 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Harga:</Text>
-                <Text style={styles.value}>{price !== null && price !== 0 ? formatPrice(Number(order.price)) : <Text style={styles.warning}>Belum ada harga</Text>}</Text>
+                <Text style={styles.value}>{order.price !== null && order.price !== 0 ? FormatUtils.formatPrice(Number(order.price)) : <Text style={styles.warning}>Belum ada harga</Text>}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Berat:</Text>
-                <Text style={styles.value}>{weight !== null && weight !== 0 ? `${weight} kg` : <Text style={styles.warning}>Belum ada berat</Text>}</Text>
+                <Text style={styles.value}>{order.weight !== null && order.weight !== 0 ? `${order.weight} kg` : <Text style={styles.warning}>Belum ada berat</Text>}</Text>
               </View>
             </View>
 

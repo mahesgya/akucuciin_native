@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { colors } from "../../constants/colors";
-import { OrderInterface } from "@/app/interface/order.interface";
-import { formatDate } from "@/app/hooks/format";
-import { getStatusColor, getTextColor } from "@/app/hooks/color";
+import colors  from "../../constants/colors";
+import OrderInterface from "@/app/interface/order.interface";
+import FormatUtils from "@/app/hooks/format";
+import StatusUtils from "@/app/hooks/color";
+
 
 interface OrderItemProps {
   order: OrderInterface;
@@ -24,13 +25,13 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
           <Text style={styles.orderDetails}>
             {order.package.name} - {order.package.price_text}
           </Text>
-          <Text style={styles.orderDate}>{formatDate(new Date(order.created_at))}</Text>
+          <Text style={styles.orderDate}>{FormatUtils.formatDate(new Date(order.created_at))}</Text>
         </View>
       </View>
 
       <View style={styles.statusContainer}>
-        <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
-          <Text style={[styles.statusText, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
+        <View style={[styles.statusContainer, { backgroundColor: StatusUtils.getStatusColor(order.status) }]}>
+          <Text style={[styles.statusText, { color: StatusUtils.getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
         </View>
       </View>
     </TouchableOpacity>

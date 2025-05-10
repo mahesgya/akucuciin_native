@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import { colors } from "../../constants/colors";
-import { OrderInterface } from "@/app/interface/order.interface";
-import { getStatusColor, getTextColor } from "@/app/hooks/color";
+import colors  from "../../constants/colors";
+import OrderInterface from "@/app/interface/order.interface";
+import StatusUtils from "@/app/hooks/color";
+
 
 interface OrderItemProps {
   order: OrderInterface;
@@ -38,8 +39,8 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
       </View>
 
       <View style={styles.statusContainer} >
-        <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
-          <Text style={[styles.statusText, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
+        <View style={[styles.statusContainer, { backgroundColor: StatusUtils.getStatusColor(order.status) }]}>
+          <Text style={[styles.statusText, { color: StatusUtils.getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
         </View>
       </View>
     </TouchableOpacity>

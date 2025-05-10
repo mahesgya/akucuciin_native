@@ -8,7 +8,7 @@ import AuthApi from "../api/auth.api";
 import ProfileApi from "../api/profile.api";
 import AlertService from "../hooks/alert";
 
-import { colors } from "../constants/colors";
+import  colors  from "../constants/colors";
 import { LaundryProfile } from "../interface/profile.interface";
 
 const DashboardProfile: React.FC = () => {

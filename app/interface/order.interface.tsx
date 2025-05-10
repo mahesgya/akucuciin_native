@@ -31,7 +31,7 @@ interface Driver {
     telephone: string | null;
 }
 
-export interface OrderInterface {
+interface OrderInterface {
     id: string;
     content: string;
     status: string;
@@ -51,3 +51,5 @@ export interface OrderInterface {
     package: Package;
     driver: Driver;
 }
+
+export default OrderInterface

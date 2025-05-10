@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { colors } from '../../constants/colors';
+import colors  from '../../constants/colors';
 
 interface MonthOption {
   label: string;

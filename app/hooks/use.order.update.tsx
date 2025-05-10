@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import AlertService from "./alert";
 import OrderApi from "../api/order.api";
 
-export const useOrderUpdate = (accessToken: string, orderId: string) => {
+const useOrderUpdate = (accessToken: string, orderId: string) => {
   const [loading, setLoading] = useState(false);
 
   const handleStatusUpdate = async (status: string, weight: number, order: any, setOrder: React.Dispatch<React.SetStateAction<any>>, setStatusModalVisible: React.Dispatch<React.SetStateAction<boolean>>) => {
@@ -80,3 +80,5 @@ export const useOrderUpdate = (accessToken: string, orderId: string) => {
     loading,
   };
 };
+
+export default useOrderUpdate
