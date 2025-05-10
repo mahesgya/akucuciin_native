@@ -42,13 +42,13 @@ const OrderDetail = () => {
         const token = await AsyncStorage.getItem("accessToken");
         if (token) {
           setAccessToken(token);
-          const orderData: OrderInterface[] = await OrderApi.getOrderById(orderId, token);
-          const currentOrder = orderData[0];
+          
+          const orderData: OrderInterface = await OrderApi.getOrderById(orderId, token);
 
-          setOrder(currentOrder);
-          setStatus(currentOrder.status);
-          setWeight(Number(currentOrder.weight));
-          setPrice(Number(currentOrder.price));
+          setOrder(orderData);
+          setStatus(orderData.status);
+          setWeight(Number(orderData.weight));
+          setPrice(Number(orderData.price));
         } else {
           AlertService.error("Tidak ada token", "Token tidak ditemukan.");
         }

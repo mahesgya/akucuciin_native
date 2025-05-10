@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Mitra Laundry Akucuciin",
-    "slug": "Mitra Laundry Akucuciin",
+    "name": "MitraAkucuciin",
+    "slug": "akucuciin-mitra-apps",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/LogoAkucuciin2.png",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/LogoAkucuciin2.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.akucuciin.mitra"
     },
     "web": {
       "bundler": "metro",
@@ -36,40 +37,30 @@
       [
         "expo-font",
         {
-          "fonts": [
-            {
-              "fontFamily": "Montserrat",
-              "fontFile": "./assets/fonts/Montserrat-Regular.ttf"
-            }
-          ],
           "android": {
-            "fonts": [
-              {
-                "fontFamily": "Montserrat",
-                "fontDefinitions": [
-                  {
-                    "path": "./assets/fonts/Montserrat-Regular.ttf",
-                    "weight": 500
-                  },
-                  {
-                    "path": "./assets/fonts/Montserrat-Bold.ttf",
-                    "weight": 700
-                  }
-                ]
-              }
-            ]
+            "fonts": ["./assets/fonts/Montserrat-Regular.ttf", "./assets/fonts/Montserrat-Bold.ttf"]
           },
           "ios": {
-            "fonts": [
-              "./assets/fonts/Montserrat-Regular.ttf",
-              "./assets/fonts/Montserrat-Bold.ttf"
-            ]
+            "fonts": ["./assets/fonts/Montserrat-Regular.ttf", "./assets/fonts/Montserrat-Bold.ttf"]
           }
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "3ce10af8-be52-4fb4-b248-c042667e0c46"
+      }
+    },
+    "owner": "27mahes",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/3ce10af8-be52-4fb4-b248-c042667e0c46"
     }
   }
 }
