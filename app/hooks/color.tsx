@@ -24,7 +24,7 @@ export const getTextColor = (status: string): string => {
     case "pending":
       return colors.white;
     case "kesalahan":
-      return colors.black_60;
+      return colors.black;
     default:
       return colors.white;
   }

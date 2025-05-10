@@ -37,7 +37,11 @@ const DashboardOrder = () => {
 
         if (token) {
           const response: OrderInterface[] = await OrderApi.getOrderByLaundry(token);
-          setOrders(response);
+          const sortedOrders = response.sort((a, b) => {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+          });
+
+          setOrders(sortedOrders);
         } else {
           AlertService.error("Tidak ada token", "Token tidak ditemukan.");
         }
@@ -84,9 +88,9 @@ const DashboardOrder = () => {
     router.push({
       pathname: "/dashboard/order/[orderId]",
       params: { orderId },
-    });    
+    });
   };
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />

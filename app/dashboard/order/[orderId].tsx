@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Modal, ScrollView, ActivityIndicator, Linking } from "react-native";
 import OrderApi from "../../api/order.api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { OrderInterface } from "@/app/interface/order.interface";
@@ -91,7 +91,9 @@ const OrderDetail = () => {
         <View>
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{formatDate(new Date(order.created_at))}</Text>
-          <Text style={styles.headerPackage}>{order.package.name} - {order.package.price_text}</Text>
+          <Text style={styles.headerPackage}>
+            {order.package.name} - {order.package.price_text}
+          </Text>
           <Text style={styles.headerPrice}>{price !== 0 ? formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
           <View style={[styles.statusContainer, { backgroundColor: getStatusColor(order.status) }]}>
             <Text style={[styles.headerStatus, { color: getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
@@ -120,8 +122,23 @@ const OrderDetail = () => {
             <View style={styles.sectionContainer}>
               <View style={styles.row}>
                 <Text style={styles.label}>Maps:</Text>
-                <Text style={styles.value}>{order.maps_pinpoint}</Text>
+                <TouchableOpacity onPress={() => Linking.openURL(order.maps_pinpoint)} style={{ flex: 1 }}>
+                  <Text
+                    style={[
+                      styles.value,
+                      {
+                        color: colors.primary,
+                        flexWrap: "wrap",
+                        flexShrink: 1,
+                      },
+                    ]}
+                    numberOfLines={3}
+                  >
+                    {order.maps_pinpoint}
+                  </Text>
+                </TouchableOpacity>
               </View>
+
               <View style={styles.row}>
                 <Text style={styles.label}>Kode Promo:</Text>
                 <Text style={styles.value}>{order.coupon_code !== "" ? order.coupon_code : "Tidak Ada Kode Promo"}</Text>
@@ -132,7 +149,7 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Note:</Text>
-                <Text style={styles.value}>{order.note !== null ? order.note : "Tidak Ada Notes"}</Text>
+                <Text style={styles.value}>{order.note !== null && order.note !== "" ? order.note : "Tidak Ada Notes"}</Text>
               </View>
             </View>
 
