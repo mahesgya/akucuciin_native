@@ -50,17 +50,21 @@
       "typedRoutes": true
     },
     "extra": {
+      
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "3ce10af8-be52-4fb4-b248-c042667e0c46"
+        "projectId": "71df9e15-9d60-4148-9082-95b3afc26bd4"
       }
     },
     "owner": "27mahes",
     "runtimeVersion": "1.0.0",
     "updates": {
-      "url": "https://u.expo.dev/3ce10af8-be52-4fb4-b248-c042667e0c46"
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/71df9e15-9d60-4148-9082-95b3afc26bd4",
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD"
     }
   }
 }

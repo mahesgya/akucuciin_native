@@ -2,7 +2,6 @@ import React from "react";
 import { View, Image, TouchableOpacity, StyleSheet } from "react-native";
 import {useRouter, usePathname} from "expo-router";
 
-
 const NavigationBar = () => {
     const router = useRouter();
     const pathname = usePathname();
@@ -33,7 +32,6 @@ const NavigationBar = () => {
         { name: 'Order', icon: 'history', href: '/dashboard/order' },
         { name: 'Profile', icon: 'profile', href: '/dashboard/profile' },
       ];
-
 
     return (
         <View style={styles.container}>

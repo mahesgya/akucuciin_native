@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.container}>
+    <View  style={styles.container}>
       <Image source={require("../assets/images/logo.panjang.png")} style={styles.logo} resizeMode="contain" />
 
       <Text style={styles.title}>LOGIN</Text>
@@ -42,7 +42,7 @@ const Login = () => {
       <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

@@ -2,14 +2,14 @@ import { Slot } from "expo-router";
 import { View, StyleSheet } from "react-native";
 import NavigationBar from "../ui/bar/navigation.bar";
 
-export default function AppLayout() {
+export default function DashboardLayout() {
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
-        <Slot />
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <Slot />
+        </View>
+        <NavigationBar />
       </View>
-      <NavigationBar />
-    </View>
   );
 }
 

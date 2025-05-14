@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import colors from "../../constants/colors";
-import OrderInterface from "@/app/interface/order.interface";
+import { OrderInterface } from "@/app/interface/order.interface";
 import StatusUtils from "@/app/hooks/color";
 
 interface OrderItemProps {

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableOpacity, TextInput, Platform, StatusBar, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, TextInput, Platform, StatusBar, ActivityIndicator } from "react-native";
 import { AxiosError } from "axios";
 import colors from "../constants/colors";
 import { Feather } from "@expo/vector-icons";
 import { Calendar } from "react-native-calendars";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import OrderApi from "../api/order.api";
 import OrderCardHome from "../ui/card/order.card.home";

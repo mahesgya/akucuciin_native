@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TextInput, Platform, StatusBar } from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput, Platform, StatusBar } from "react-native";
 import colors from "../../constants/colors";
 import { Feather } from "@expo/vector-icons";
-
+import { SafeAreaView } from "react-native-safe-area-context";
 import OrderApi from "../../api/order.api";
 import OrderCardHistory from "../../ui/card/order.card.history";
 import AlertService from "../../hooks/alert";
