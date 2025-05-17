@@ -86,6 +86,7 @@ const OrderDetail = () => {
       </View>
     );
   }
+
   return (
     <ScrollView style={styles.container}>
       {order && (
@@ -96,7 +97,7 @@ const OrderDetail = () => {
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{FormatUtils.formatDate(new Date(order.created_at))}</Text>
           <Text style={styles.headerPackage}>{order.package.name}</Text>
-          <Text style={styles.headerPrice}>{price !== 0 ? FormatUtils.formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
+          <Text style={styles.headerPrice}>{order.price !== 0 ? FormatUtils.formatPrice(Number(order.price)) : "Belum Ada Harga"}</Text>
           <View style={[styles.statusContainer, { backgroundColor: StatusUtils.getStatusColor(order.status) }]}>
             <Text style={[styles.headerStatus, { color: StatusUtils.getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
           </View>
@@ -117,7 +118,21 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Telephone:</Text>
-                <Text style={styles.value}>{order.customer.telephone}</Text>
+
+                <TouchableOpacity onPress={() => Linking.openURL(`https://wa.me/${order.customer.telephone}`)} style={{ flex: 1 }}>
+                  <Text
+                    style={[
+                      styles.value,
+                      {
+                        color: colors.primary,
+                        flexWrap: "wrap",
+                        flexShrink: 1,
+                      },
+                    ]}
+                  >
+                    {order.customer.telephone}
+                  </Text>
+                </TouchableOpacity>
               </View>
             </View>
 
@@ -205,11 +220,11 @@ const OrderDetail = () => {
                   value={weightInput}
                   onChangeText={(text) => {
                     if (/^[0-9]*\.?[0-9]*$/.test(text)) {
-                      setWeightInput(text); 
+                      setWeightInput(text);
 
                       const parsed = parseFloat(text);
                       if (!isNaN(parsed)) {
-                        setWeight(parsed); 
+                        setWeight(parsed);
                       } else {
                         setWeight(0);
                       }

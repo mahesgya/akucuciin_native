@@ -1,9 +1,56 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, ActivityIndicator } from "react-native";
 import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import AuthApi from "./api/auth.api";
+import { AxiosError } from "axios";
+import AlertService from "./hooks/alert";
 
 const Index = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const checkRefreshToken = async () => {
+    const refreshToken = await AsyncStorage.getItem("refreshToken");
+
+    if (refreshToken !== null) {
+      try {
+        setLoading(true);
+        await AuthApi.TokenRefresh(refreshToken);
+        return true;
+      } catch (error) {
+        const err = error as AxiosError<any>;
+        const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
+        AlertService.error("Gagal Mendapatkan data", message);
+        return false;
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const initApp = async () => {
+      const tokenExists = await checkRefreshToken();
+
+      if (tokenExists) {
+        router.push("/dashboard/home");
+      }
+    };
+
+    initApp();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#1E90FF" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -30,6 +77,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   logo: {
     fontSize: 24,

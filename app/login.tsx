@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, ActivityIndicator } from "react-native";
 import AuthApi from "./api/auth.api";
 import AlertService from "./hooks/alert";
 import { AxiosError } from "axios";
@@ -8,22 +8,34 @@ import { useRouter } from "expo-router";
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const router = useRouter();
 
   const handleLogin = async () => {
     try {
+      setLoading(true)
       await AuthApi.Login(email, password);
       router.push("/dashboard/home");
     } catch (error) {
       const err = error as AxiosError<any>;
       const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
       AlertService.error("Gagal Melakukan Login", message);
+    }finally{
+      setLoading(false)
     }
   };
 
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#1E90FF" />
+      </View>
+    );
+  }
+
   return (
-    <View  style={styles.container}>
+    <View style={styles.container}>
       <Image source={require("../assets/images/logo.panjang.png")} style={styles.logo} resizeMode="contain" />
 
       <Text style={styles.title}>LOGIN</Text>
@@ -53,7 +65,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   logo: {
     width: 200,
     height: 60,
@@ -105,7 +121,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     width: "85%",
     elevation: 4,
-    fontFamily: "Montserrat"
+    fontFamily: "Montserrat",
   },
   loginText: {
     color: "#fff",

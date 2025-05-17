@@ -33,10 +33,10 @@ const AuthApi = {
     TokenRefresh: async (refreshTokenOld:string) => {
         try {
             const response = await axios.put(`${API_URL}/api/auth`, {refresh_token : refreshTokenOld} )
-            const {accessTokenNew, refreshTokenNew} = response.data.data;
+            const {accessToken, refreshToken} = response.data.data;
 
-            await AsyncStorage.setItem("accessToken", accessTokenNew);
-            await AsyncStorage.setItem("refreshToken", refreshTokenNew);
+            await AsyncStorage.setItem("accessToken", accessToken);
+            await AsyncStorage.setItem("refreshToken", refreshToken);
 
             return response.data.data;
         } catch (error) {

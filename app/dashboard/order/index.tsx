@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, FlatList, TextInput, Platform, StatusBar } from "react-native";
+import { View, Text, StyleSheet, FlatList, TextInput, Platform, StatusBar, ActivityIndicator } from "react-native";
 import colors from "../../constants/colors";
 import { Feather } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -22,6 +22,7 @@ const DashboardOrder = () => {
   const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [orders, setOrders] = useState<OrderInterface[]>([]);
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
 
   const monthOptions = months.map((month, index) => ({
@@ -32,6 +33,7 @@ const DashboardOrder = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
+        setLoading(true);
         const token = await AsyncStorage.getItem("accessToken");
         setAccessToken(token);
 
@@ -49,6 +51,8 @@ const DashboardOrder = () => {
         const err = error as AxiosError<any>;
         const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
         AlertService.error("Gagal Mendapatkan data order", message);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -90,6 +94,14 @@ const DashboardOrder = () => {
       params: { orderId },
     });
   };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#1E90FF" />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -147,6 +159,11 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 15,
     backgroundColor: "#fff",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   yearFilter: {
     position: "absolute",
