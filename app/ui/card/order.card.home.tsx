@@ -88,13 +88,13 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   orderTime: {
-    fontSize: 10,
+    fontSize: 12,
     color: colors.black_40,
     marginBottom: 4,
     fontFamily: "Montserrat",
   },
   orderDetails: {
-    fontSize: 10,
+    fontSize: 12,
     color: colors.black_60,
     marginBottom: 4,
     fontFamily: "Montserrat",
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     borderRadius: 7,
   },
   statusText: {
-    fontSize: 10,
+    fontSize: 12,
     color: "#ffffff",
     textAlign: "center",
     textShadowColor: "#000",

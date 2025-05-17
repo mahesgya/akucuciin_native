@@ -28,6 +28,7 @@ const Index = () => {
         setLoading(false);
       }
     } else {
+      setLoading(false)
       return false;
     }
   };

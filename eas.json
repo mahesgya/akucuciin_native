@@ -5,7 +5,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://staging.akucuciin.my.id"
+        "EXPO_PUBLIC_API_URL": "https://apiv4.akucuciin.my.id"
       }
     },
     "preview2": {

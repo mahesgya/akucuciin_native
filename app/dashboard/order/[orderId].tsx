@@ -106,7 +106,18 @@ const OrderDetail = () => {
             <View style={styles.sectionContainer}>
               <View style={styles.row}>
                 <Text style={styles.label}>Order ID:</Text>
-                <Text style={styles.value}>{order.id}</Text>
+                <Text
+                  style={[
+                    styles.value,
+                    {
+                      flexWrap: "wrap",
+                      flexShrink: 1,
+                    },
+                  ]}
+                  numberOfLines={3}
+                >
+                  {order.id}
+                </Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Email:</Text>
@@ -166,7 +177,18 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Note:</Text>
-                <Text style={styles.value}>{order.note !== null && order.note !== "" ? order.note : "Tidak Ada Notes"}</Text>
+                <Text
+                  style={[
+                    styles.value,
+                    {
+                      flexWrap: "wrap",
+                      flexShrink: 1,
+                    },
+                  ]}
+                  numberOfLines={3}
+                >
+                  {order.note !== null && order.note !== "" ? order.note : "Tidak Ada Notes"}
+                </Text>
               </View>
             </View>
 
@@ -177,7 +199,7 @@ const OrderDetail = () => {
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Pembayaran:</Text>
-                <Text style={styles.value}>{order.status_payment}</Text>
+                <Text style={[styles.value, { color: order.status_payment === "sudah bayar" ? colors.selesai : colors.batal }]}>{order.status_payment}</Text>
               </View>
               <View style={styles.row}>
                 <Text style={styles.label}>Total Harga:</Text>
