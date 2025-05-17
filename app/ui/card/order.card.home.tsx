@@ -30,7 +30,7 @@ const OrderCardHome: React.FC<OrderItemProps> = ({ order, onActionPress }) => {
             {order.customer.name} <Text style={styles.orderTime}>- {formatTime(new Date(order.created_at))}</Text>
           </Text>
           <Text style={styles.orderDetails}>
-            {order.package.name} - {order.package.price_text}
+            {order.package.name}
           </Text>
         </View>
       </View>

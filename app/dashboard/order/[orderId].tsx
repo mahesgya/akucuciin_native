@@ -95,7 +95,7 @@ const OrderDetail = () => {
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{FormatUtils.formatDate(new Date(order.created_at))}</Text>
           <Text style={styles.headerPackage}>
-            {order.package.name} - {order.package.price_text}
+            {order.package.name}
           </Text>
           <Text style={styles.headerPrice}>{price !== 0 ? FormatUtils.formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
           <View style={[styles.statusContainer, { backgroundColor: StatusUtils.getStatusColor(order.status) }]}>
@@ -261,7 +261,9 @@ const OrderDetail = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 50,
   },
   loadingContainer: {
     flex: 1,
