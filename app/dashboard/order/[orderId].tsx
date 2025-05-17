@@ -305,9 +305,7 @@ const OrderDetail = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: 70,
+    padding: 20,
   },
   loadingContainer: {
     flex: 1,
@@ -360,6 +358,7 @@ const styles = StyleSheet.create({
   },
   detailContainer: {
     marginTop: 20,
+    marginBottom: 60,
   },
   sectionContainer: {
     gap: 10,
