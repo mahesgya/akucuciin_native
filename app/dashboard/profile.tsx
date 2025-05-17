@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat",
   },
   headerContainer: {
-    backgroundColor: colors.primary_90,
+    backgroundColor: colors.primary,
     padding: 20,
     alignItems: "center",
     borderBottomLeftRadius: 20,
