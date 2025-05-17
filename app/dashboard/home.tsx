@@ -45,7 +45,11 @@ const DashboardHome = () => {
 
         if (token) {
           const response: OrderInterface[] = await OrderApi.getOrderByLaundry(token);
-          setOrders(response);
+          const sortedOrders = response.sort((a, b) => {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+          });
+
+          setOrders(sortedOrders);
         } else {
           AlertService.error("Tidak ada token", "Token tidak ditemukan.");
         }

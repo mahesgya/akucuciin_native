@@ -38,6 +38,7 @@ const useOrderUpdate = (accessToken: string, orderId: string) => {
       AlertService.error("Failed", message);
     } finally {
       setLoading(false);
+      setStatusModalVisible(false);
     }
   };
 
@@ -71,6 +72,7 @@ const useOrderUpdate = (accessToken: string, orderId: string) => {
       AlertService.error("Failed", message);
     } finally {
       setLoading(false);
+      setPriceModalVisible(false);
     }
   };
 

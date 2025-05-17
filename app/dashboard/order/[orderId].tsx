@@ -17,6 +17,7 @@ const OrderDetail = () => {
   const { orderId } = useLocalSearchParams<{ orderId: string }>();
   const [order, setOrder] = useState<OrderInterface>();
   const [status, setStatus] = useState<string>("");
+  const [weightInput, setWeightInput] = useState<string>("");
   const [weight, setWeight] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
   const [accessToken, setAccessToken] = useState<string>("");
@@ -94,9 +95,7 @@ const OrderDetail = () => {
           </TouchableOpacity>
           <Text style={styles.header}>{order.customer.name}</Text>
           <Text style={styles.headerDate}>{FormatUtils.formatDate(new Date(order.created_at))}</Text>
-          <Text style={styles.headerPackage}>
-            {order.package.name}
-          </Text>
+          <Text style={styles.headerPackage}>{order.package.name}</Text>
           <Text style={styles.headerPrice}>{price !== 0 ? FormatUtils.formatPrice(Number(price)) : "Belum Ada Harga"}</Text>
           <View style={[styles.statusContainer, { backgroundColor: StatusUtils.getStatusColor(order.status) }]}>
             <Text style={[styles.headerStatus, { color: StatusUtils.getTextColor(order.status) }]}>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</Text>
@@ -203,12 +202,20 @@ const OrderDetail = () => {
                 <Text style={styles.inputLabel}>Berat (Kg):</Text>
                 <TextInput
                   style={styles.input}
-                  value={weight !== null ? weight.toString() : ""}
+                  value={weightInput}
                   onChangeText={(text) => {
-                    const parsed = text === "" ? 0 : parseInt(text, 10);
-                    setWeight(isNaN(parsed) ? 0 : parsed);
+                    if (/^[0-9]*\.?[0-9]*$/.test(text)) {
+                      setWeightInput(text); 
+
+                      const parsed = parseFloat(text);
+                      if (!isNaN(parsed)) {
+                        setWeight(parsed); 
+                      } else {
+                        setWeight(0);
+                      }
+                    }
                   }}
-                  keyboardType="numeric"
+                  keyboardType={"numeric"}
                   placeholder="Input berat (Kg)"
                 />
 
@@ -263,7 +270,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 50,
+    paddingBottom: 70,
   },
   loadingContainer: {
     flex: 1,
