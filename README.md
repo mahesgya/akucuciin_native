@@ -1,5 +1,22 @@
 # 🚀 Project RPL P2 — Mitra Apps Laundry (React Native + Expo)
 
+
+## 👥 Identitas Kelompok
+
+Kelompok 2 - Rekayasa Perangkat Lunak
+
+| Nama                        | NIM           | Tugas Utama                             |
+|-----------------------------|---------------|-----------------------------------------|
+| Mutia Saniya Rahma         | G6401231002   | Dokumentasi & UI Design                 |
+| Fikri Nurhaekal            | G6401231030   | Backend Development                     |
+| Muhammad Rafi’ Pangestu    | G6401231058   | Frontend Development (React Native)     |
+| Muhammad Alif Qalbiy       | G6401231084   | Database Design & API Integration       |
+| Anargya Isadhi Maheswara   | G6401231118   | Project Management & System Analysis    |
+
+---
+
+## 📱 Deskripsi Singkat Produk
+
 Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangka Proyek RPL P2 menggunakan **React Native** dengan **Expo**. Aplikasi ini dirancang untuk mempermudah mitra dalam mengelola pesanan laundry, melihat detail pelanggan, dan mempercepat proses layanan digital laundry.
 
 ---
