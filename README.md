@@ -50,14 +50,14 @@ _Diagram dapat dilihat pada file laporan atau dokumentasi._
 ## 📸 Screenshot Tampilan Fitur
 
 
-### Login
-![Tampilan 1](assets/images/ui1.png)
+### Splash Screen, Login, Dashboard, Kalender
+<img src="assets/images/ui1.png" width="400"/>
 
-### Dashboard Order
-![Dashboard](assets/images/ui2.png)
+### Profile, Cek Status dan Update Harga
+<img src="assets/images/ui2.png" width="400"/>
 
-### Kalender Pemesanan
-![Kalender](assets/images/ui3.png)
+### Riwayat Pemesanan
+<img src="assets/images/ui3.png" width="400"/>
 
 ---
 
