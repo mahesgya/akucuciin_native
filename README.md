@@ -1,4 +1,4 @@
-# 🚀 Project RPL P2 — Mitra Apps Laundry (React Native + Expo)
+# 🚀 Project RPL Kelompok 2 P2 — Mitra Apps Laundry Frontend (React Native + Expo)
 
 
 ## 👥 Identitas Kelompok
@@ -17,7 +17,7 @@ Kelompok 2 - Rekayasa Perangkat Lunak
 
 ## 📱 Deskripsi Singkat Produk
 
-Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangka Proyek RPL P2 menggunakan **React Native** dengan **Expo**. Aplikasi ini dirancang untuk mempermudah mitra dalam mengelola pesanan laundry, melihat detail pelanggan, dan mempercepat proses layanan digital laundry.
+Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangka Proyek RPL Kelompok 2 P2 menggunakan **React Native** dengan **Expo**. Aplikasi ini dirancang untuk mempermudah mitra dalam mengelola pesanan laundry, melihat detail pelanggan, dan mempercepat proses layanan digital laundry.
 
 ---
 
@@ -32,44 +32,6 @@ Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangk
 - Riwayat Pesanan
 
 ---
-
-## 🗂️ Diagram (Opsional)
-
-Berikut adalah beberapa diagram dari sistem:
-
-- Use Case Diagram  
-- Entity Relationship Diagram (ERD)  
-- Class Diagram  
-- Activity Diagram (Lihat Order, Update Status, Update Profil)
-
-_Diagram dapat dilihat pada file laporan atau dokumentasi._
-
----
-
-## 📸 Screenshot Tampilan Fitur
-
-> (Tambahkan file screenshot dengan nama misalnya `login.png`, `dashboard.png`, `kalender.png`, dan referensikan seperti berikut:)
-
-### Login
-![Login Screen](screenshots/login.png)
-
-### Dashboard Order
-![Dashboard](screenshots/dashboard.png)
-
-### Kalender Pemesanan
-![Kalender](screenshots/kalender.png)
-
-### Profil Mitra
-![Profil](screenshots/profile.png)
-
-### Update Status
-![Update Status](screenshots/update_status.png)
-
-### Riwayat Order
-![Riwayat Pesanan](screenshots/riwayat.png)
-
----
-
 
 ## 📦 Teknologi yang Digunakan
 
@@ -108,30 +70,4 @@ Pengembangan dilakukan dalam folder `app/` menggunakan sistem **file-based routi
 
 ---
 
-## 🔄 Reset Proyek (Jika Diperlukan)
 
-Untuk memulai dari awal dengan struktur kosong:
-
-```bash
-npm run reset-project
-```
-
-Perintah ini akan memindahkan starter code ke direktori `app-example` dan membuat direktori `app/` kosong sebagai tempat kamu memulai pengembangan dari nol.
-
----
-
-## 📚 Dokumentasi & Sumber Belajar
-
-- [Dokumentasi Expo](https://docs.expo.dev/)
-- [Tutorial Expo](https://docs.expo.dev/tutorial/introduction/)
-
----
-
-## 🤝 Komunitas & Kontribusi
-
-Bergabunglah dengan komunitas developer Expo:
-
-- [GitHub Expo](https://github.com/expo/expo)
-- [Discord Resmi Expo](https://chat.expo.dev)
-
----
