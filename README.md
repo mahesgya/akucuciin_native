@@ -34,16 +34,22 @@ Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangk
 ---
 
 
-## 🗂️ Diagram (Opsional)
+## 🗂️ Diagram 
 
 Berikut adalah beberapa diagram dari sistem:
 
-- Use Case Diagram  
-- Entity Relationship Diagram (ERD)  
-- Class Diagram  
-- Activity Diagram (Lihat Order, Update Status, Update Profil)
+### Use Case Diagram
+<img src="assets/images/usecasediagram.png" width="700"/>  
 
-_Diagram dapat dilihat pada file laporan atau dokumentasi._
+### Entity Relationship Diagram (ERD)  
+<img src="assets/images/entityrelationshipdiagram.png" width="700"/>  
+
+### Class Diagram
+<img src="assets/images/classdiagram.png" width="700"/>  
+
+### Activity Diagram
+<img src="assets/images/activitydiagram.png" width="700"/>  
+<img src="assets/images/activitydiagram2.png" width="700"/>  
 
 ---
 
