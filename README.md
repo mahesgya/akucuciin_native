@@ -7,11 +7,11 @@ Kelompok 2 - Rekayasa Perangkat Lunak
 
 | Nama                        | NIM           | Tugas Utama                             |
 |-----------------------------|---------------|-----------------------------------------|
-| Mutia Saniya Rahma         | G6401231002   | Dokumentasi & UI Design                 |
-| Fikri Nurhaekal            | G6401231030   | Backend Development                     |
-| Muhammad Rafi’ Pangestu    | G6401231058   | Frontend Development (React Native)     |
-| Muhammad Alif Qalbiy       | G6401231084   | Database Design & API Integration       |
-| Anargya Isadhi Maheswara   | G6401231118   | Project Management & System Analysis    |
+| Mutia Saniya Rahma         | G6401231002   | UI Design                               |
+| Fikri Nurhaekal            | G6401231030   | UI Design                               |
+| Muhammad Rafi’ Pangestu    | G6401231058   | Frontend Development                    |
+| Muhammad Alif Qalbiy       | G6401231084   | Frontend Development                    |
+| Anargya Isadhi Maheswara   | G6401231118   | Backend Development                     |
 
 ---
 
@@ -30,6 +30,34 @@ Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangk
 - Profil Mitra Laundry
 - Perbarui Status & Harga Pesanan
 - Riwayat Pesanan
+
+---
+
+
+## 🗂️ Diagram (Opsional)
+
+Berikut adalah beberapa diagram dari sistem:
+
+- Use Case Diagram  
+- Entity Relationship Diagram (ERD)  
+- Class Diagram  
+- Activity Diagram (Lihat Order, Update Status, Update Profil)
+
+_Diagram dapat dilihat pada file laporan atau dokumentasi._
+
+---
+
+## 📸 Screenshot Tampilan Fitur
+
+
+### Login
+![Tampilan 1](assets/images/ui1.png)
+
+### Dashboard Order
+![Dashboard](assets/images/ui2.png)
+
+### Kalender Pemesanan
+![Kalender](assets/images/ui3.png)
 
 ---
 
