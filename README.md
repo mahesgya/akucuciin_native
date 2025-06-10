@@ -21,6 +21,56 @@ Ini adalah aplikasi mobile untuk **Mitra Laundry** yang dikembangkan dalam rangk
 
 ---
 
+
+## 🧭 Fitur Utama
+
+- Login Mitra Laundry
+- Dashboard Order
+- Kalender Pemesanan
+- Profil Mitra Laundry
+- Perbarui Status & Harga Pesanan
+- Riwayat Pesanan
+
+---
+
+## 🗂️ Diagram (Opsional)
+
+Berikut adalah beberapa diagram dari sistem:
+
+- Use Case Diagram  
+- Entity Relationship Diagram (ERD)  
+- Class Diagram  
+- Activity Diagram (Lihat Order, Update Status, Update Profil)
+
+_Diagram dapat dilihat pada file laporan atau dokumentasi._
+
+---
+
+## 📸 Screenshot Tampilan Fitur
+
+> (Tambahkan file screenshot dengan nama misalnya `login.png`, `dashboard.png`, `kalender.png`, dan referensikan seperti berikut:)
+
+### Login
+![Login Screen](screenshots/login.png)
+
+### Dashboard Order
+![Dashboard](screenshots/dashboard.png)
+
+### Kalender Pemesanan
+![Kalender](screenshots/kalender.png)
+
+### Profil Mitra
+![Profil](screenshots/profile.png)
+
+### Update Status
+![Update Status](screenshots/update_status.png)
+
+### Riwayat Order
+![Riwayat Pesanan](screenshots/riwayat.png)
+
+---
+
+
 ## 📦 Teknologi yang Digunakan
 
 - [React Native](https://reactnative.dev/)
