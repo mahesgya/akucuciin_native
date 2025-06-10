@@ -51,13 +51,13 @@ _Diagram dapat dilihat pada file laporan atau dokumentasi._
 
 
 ### Splash Screen, Login, Dashboard, Kalender
-<img src="assets/images/ui1.png" width="400"/>
+<img src="assets/images/ui1.png" width="700"/>
 
 ### Profile, Cek Status dan Update Harga
-<img src="assets/images/ui2.png" width="400"/>
+<img src="assets/images/ui2.png" width="700"/>
 
 ### Riwayat Pemesanan
-<img src="assets/images/ui3.png" width="400"/>
+<img src="assets/images/ui3.png" width="700"/>
 
 ---
 
