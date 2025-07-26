@@ -123,10 +123,42 @@ const OrderDetail = () => {
                 <Text style={styles.label}>Email:</Text>
                 <Text style={styles.value}>{order.customer.email}</Text>
               </View>
-              <View style={styles.row}>
-                <Text style={styles.label}>Tanggal:</Text>
-                <Text style={styles.value}>{FormatUtils.formatDate(new Date(order.created_at))}</Text>
-              </View>
+              {order?.pickup_date &&
+                (() => {
+                  const pieces = order.pickup_date.trim().split(" ");
+                  const hasTimeRange = pieces.length > 1;
+                  const timeRange = hasTimeRange ? pieces.slice(0, 3).join(" ") : null;
+                  const rawDate = hasTimeRange ? pieces[3] : pieces[0];
+
+                  const [day, month, year] = rawDate.split("-");
+                  const dateForJS = `${year}-${month}-${day}`;
+                  const jsDate = new Date(dateForJS);
+                  const dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+                  const dayName = dayNames[jsDate.getDay()];
+
+                  const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+                  const formattedDate = `${day} ${monthNames[Number(month) - 1]} ${year}`;
+
+                  return (
+                    <>
+                      <View style={styles.row}>
+                        <Text style={styles.label}>
+                          Tanggal Penjemputan:
+                        </Text>
+                        <Text style={styles.value}>
+                          {dayName}, {formattedDate}
+                        </Text>
+                      </View>
+                      {hasTimeRange && (
+                        <View style={styles.row}>
+                          {" "}
+                          <Text style={styles.label}>Jam Penjemputan:</Text>
+                          <Text style={styles.value}>{timeRange}</Text>
+                        </View>
+                      )}
+                    </>
+                  );
+                })()}
               <View style={styles.row}>
                 <Text style={styles.label}>Telephone:</Text>
 
