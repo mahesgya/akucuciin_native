@@ -9,6 +9,7 @@ export interface LaundryProfile {
   telephone: string;
   address: string;
   maps_pinpoint: string;
+  is_open: boolean;
   city: string;
   area: string;
   latitude: string;
