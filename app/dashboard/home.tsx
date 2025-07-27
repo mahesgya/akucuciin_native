@@ -14,6 +14,7 @@ import AlertService from "../hooks/alert";
 import FormatUtils from "../hooks/format";
 import { OrderInterface } from "../interface/order.interface";
 import { useRouter } from "expo-router";
+import ProfileApi from "../api/profile.api";
 
 const statusOptions = [
   { label: "Pending", value: "pending", color: colors.pending },
@@ -64,6 +65,33 @@ const DashboardHome = () => {
 
     fetchOrders();
   }, [accessToken]);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        setLoading(true);
+        const token = await AsyncStorage.getItem("accessToken");
+
+        if (token) {
+          const profileData = await ProfileApi.getProfile(token);
+          console.log(profileData)
+          if(profileData.is_open === 0){
+            AlertService.isClosed()
+          }
+        } else {
+          AlertService.error("Tidak ada token", "Token tidak ditemukan.");
+        }
+      } catch (error) {
+        const err = error as AxiosError<any>;
+        const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
+        AlertService.error("Gagal Mendapatkan data", message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const filteredOrders = orders.filter((order) => {
     const orderDate = new Date(order.created_at);
