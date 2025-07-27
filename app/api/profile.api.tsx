@@ -9,7 +9,7 @@ const ProfileApi = {
             const response = await axios.get(`${API_URL}/api/laundry_partner/app/profile`, {
                 headers : {Authorization: `Bearer ${accessToken}`}
             })
-
+            console.log(response)
             return response.data.data;
         } catch (error) {
             throw error;
@@ -25,7 +25,18 @@ const ProfileApi = {
         } catch (error) {
             throw error;
         }
+    },
+    openCloseToggle : async (accessToken:string) => {
+        try {
+            const response = await axios.put(`${API_URL}/api/laundry_partner/app/toggle-open-close`, {}, {
+                headers : {Authorization: `Bearer ${accessToken}`}
+            })
+            return response.data.data;
+        } catch (error) {
+            throw error;
+        }
     }
+
 }
 
 export default ProfileApi
