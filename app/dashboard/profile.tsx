@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, ActivityIndicator, Alert, Switch, Animated, Easing } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AxiosError } from "axios";
 import { router } from "expo-router";
@@ -10,10 +10,58 @@ import AlertService from "../hooks/alert";
 
 import colors from "../constants/colors";
 import { LaundryProfile } from "../interface/profile.interface";
+import { Ionicons } from "@expo/vector-icons";
+
+const CustomToggle: React.FC<{ isOpen: boolean; onToggle: () => void; isLoading: boolean;}> = ({ isOpen, onToggle, isLoading }) => {
+  const animatedValue = useRef(new Animated.Value(isOpen ? 1 : 0)).current;
+
+  useEffect(() => {
+    Animated.timing(animatedValue, {
+      toValue: isOpen ? 1 : 0,
+      duration: 300,
+      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+      useNativeDriver: false,
+    }).start();
+  }, [isOpen]);
+
+  const translateX = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [4, 44], 
+  });
+
+  const backgroundColor = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#DCE9F5', '#40A578'], 
+  });
+
+  return (
+    <TouchableOpacity onPress={onToggle} disabled={isLoading} activeOpacity={0.9}>
+      <Animated.View style={[styles.toggleBase, { backgroundColor }]}>
+        <Animated.View style={[styles.toggleThumb, { transform: [{ translateX }] }]}>
+          {isLoading ? (
+            <ActivityIndicator size="small" color="#3674B5" />
+          ) : (
+            <Ionicons 
+              name={isOpen ? "sunny" : "moon"} 
+              size={18} 
+              color={isOpen ? '#FFD700' : '#DCE9F5'} 
+            />
+          )}
+        </Animated.View>
+      </Animated.View>
+    </TouchableOpacity>
+  );
+};
+
 
 const DashboardProfile: React.FC = () => {
   const [profile, setProfile] = useState<LaundryProfile | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  useEffect(() => {
+    setIsOpen(profile?.is_open === 1)
+  }, [profile?.is_open])
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -30,7 +78,7 @@ const DashboardProfile: React.FC = () => {
       } catch (error) {
         const err = error as AxiosError<any>;
         const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
-        AlertService.error("Gagal Mendapatkan data order", message);
+        AlertService.error("Gagal Mendapatkan data profile", message);
       } finally {
         setLoading(false);
       }
@@ -52,12 +100,32 @@ const DashboardProfile: React.FC = () => {
     } catch (error) {
       const err = error as AxiosError<any>;
       const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
-      AlertService.error("Gagal Mendapatkan data order", message);
+      AlertService.error("Gagal Logout", message);
     }
   };
 
   const handleOpenMaps = () => {
     Alert.alert("Opening Maps", "Akan Membuka Maps Lokasi Google");
+  };
+
+  const handleOpenClose = async () => {
+    try {
+      setLoading(true)
+      const token = await AsyncStorage.getItem("accessToken");
+
+      if (token) {
+        const response = await ProfileApi.openCloseToggle(token);
+        setIsOpen(response.is_open)
+      } else {
+        AlertService.error("Tidak ada token", "Token tidak ditemukan.");
+      }
+    } catch (error) {
+      const err = error as AxiosError<any>;
+      const message = err.response?.data?.errors || "Terjadi kesalahan, coba lagi.";
+      AlertService.error("Gagal update status", message);
+    }finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -85,6 +153,24 @@ const DashboardProfile: React.FC = () => {
           </View>
         </View>
         <Text style={styles.headerTitle}>{profile.name.toUpperCase()}</Text>
+               <View style={styles.toggleWrapper}>
+              <CustomToggle 
+                isOpen={isOpen}
+                isLoading={loading}
+                onToggle={handleOpenClose}
+              />
+              <View style={[styles.statusBadge, { backgroundColor: isOpen ? '#28a745' : '#dc3545' }]}>
+                <Ionicons 
+                  name={isOpen ? "lock-open-outline" : "lock-closed-outline"} 
+                  size={14} 
+                  color="white"
+                  style={{ marginRight: 5 }}
+                />
+                <Text style={styles.statusBadgeText}>
+                  {isOpen ? 'Buka' : 'Tutup'}
+                </Text>
+              </View>
+            </View>
       </View>
 
       <View style={styles.infoContainer}>
@@ -284,6 +370,56 @@ const styles = StyleSheet.create({
   icon: {
     width: 20,
     height: 20,
+  },
+  toggleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  toggleLabel: {
+    marginRight: 10,
+    fontSize: 16,
+    color: '#ffffff',
+  },
+  toggleBase: {
+    width: 80,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    paddingHorizontal: 2,
+  },
+  toggleThumb: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: 'white',
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  toggleWrapper: {
+    marginTop:4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  statusBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 9,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    marginLeft: 12,
+  },
+  statusBadgeText: {
+    color: 'white',
+    fontSize: 14,
+    fontFamily: 'Montserrat_600SemiBold', 
+    fontWeight: '600',
   },
 });
 
