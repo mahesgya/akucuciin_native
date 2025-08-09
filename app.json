@@ -2,7 +2,7 @@
   "expo": {
     "name": "Mitra Apps Akucuciin",
     "slug": "akucuciin-mitra-apps",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/LogoAkucuciin2.png",
     "scheme": "myapp",
